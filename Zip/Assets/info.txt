@@ -1,0 +1,49 @@
+Zip & Unzip Files
+
+-----------
+
+Extract zipped files with ease! It helps you to extract zip/rar/7z etc and other zipped format files & access the unzipped files easily.
+
+-----------
+
+Our FREE Zip app allows you to compress your files to the ZIP format. Extract ZIP files within minutes as well!
+
+Extract zipped files with ease! It helps you to extract zip/rar/7z etc and other zipped format files & access the unzipped files easily.
+
+You can choose a zipped file to unzip from your computer or from Google Drive. Our tool allows you to choose whether you want to save your unzipped files onto your desktop computer or onto Google Drive.
+
+This software is 100% free and does not require you to pay.
+
+-----------
+
+application/vnd.google.drive.ext-type.7z
+application/vnd.google.drive.ext-type.zip
+application/vnd.google.drive.ext-type.rar
+application/vnd.google.drive.ext-type.bzip2
+application/vnd.google.drive.ext-type.gzip
+application/vnd.google.drive.ext-type.tar
+application/vnd.google.drive.ext-type.gz
+
+7z
+zip
+rar
+bzip2
+gzip
+tar
+gz
+
+-----------
+Account: 2021victorlim@gmail.com
+
+Project name
+Zip-And-Unzip
+Project ID
+zip-and-unzip
+Project number
+1004208430494
+
+Homepage: https://console.cloud.google.com/home/dashboard?authuser=6&project=zip-and-unzip
+Drive UI: https://console.cloud.google.com/apis/api/drive.googleapis.com/drive_sdk?authuser=6&project=zip-and-unzip
+GSuite: https://console.cloud.google.com/apis/api/appsmarket-component.googleapis.com/googleapps_sdk?authuser=6&project=zip-and-unzip
+OAuth Consent screen: https://console.cloud.google.com/apis/credentials/consent?project=zip-and-unzip&authuser=6
+Credentials: https://console.cloud.google.com/apis/credentials?project=zip-and-unzip&authuser=6

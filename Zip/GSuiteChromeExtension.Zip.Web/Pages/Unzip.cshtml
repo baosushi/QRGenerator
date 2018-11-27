@@ -1,0 +1,111 @@
+﻿@page "/unzip"
+
+@inject WebSettings webSettings;
+
+@{
+    this.ViewBag.Title = "Unzip Files";
+}
+
+<div id="loader"
+     data-client-id="@(this.webSettings.Google.ClientId)"
+     data-scope="https://www.googleapis.com/auth/drive"
+     data-server="@(this.webSettings.ApiServer)"></div>
+
+<h2>Unzip Files</h2>
+<p>Quickly unzip your files online to download or save to Google Drive.</p>
+
+<hr />
+
+<div class="text-center">
+    <div id="sp-0" class="sp sp-wide">
+        <p class="text-right"><span data-language="SponsoredLink">Sponsored Link:</span></p>
+
+        <div class="sp-container">
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> <!-- 728 x 90 --> <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-6475235154742772" data-ad-slot="1982829070"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<p class="text-info">Choose the files you want to unzip</p>
+
+<div class="form-group row">
+    <label class="col-lg-3 col-form-label">
+        <input type="radio" name="opt-file-input" value="upload" checked />
+        Upload from your computer
+    </label>
+    <div class="col-lg-9">
+        <input id="txt-upload-files" type="file" class="form-control" disabled />
+    </div>
+</div>
+<div class="form-group row">
+    <label class="col-lg-3 col-form-label">
+        <input type="radio" name="opt-file-input" value="drive" />
+        Select from Google Drive
+    </label>
+    <div class="col-lg-9">
+        <button id="btn-pick-drive" type="button" class="btn" disabled>
+            <img src="~/img/logo-drive.png" class="img-inline" />
+            Load from Google Drive
+        </button>
+
+        <span id="lbl-drive-files">No file selected</span>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-9">
+        <p class="text-info">
+            <small>
+                We support zip, 7z, bzip2, gzip, tar, wim
+                <abbr title="xz, apm, ar, APM, AR, ARJ, CAB, CHM, COMPOUND, CPIO, CramFS, DMG, Ext, FAT, HFS, HXS, iHEX, ISO, LZH, LZMA, MBR, MsLZ, Mub, NSIS, NTFS, MBR, RAR, RPM, PPMD, QCOW2, SPLIT, SquashFS, UDF, UEFIc, UEFIs, VDI, VHD, VMDK, WIM, XAR, Z">
+                    and more
+                </abbr><br />
+                Sorry we cannot work on files with password yet.
+            </small>
+        </p>
+    </div>
+</div>
+
+
+<hr />
+
+<div class="row">
+    <div class="col-lg-3"></div>
+    <div id="pnl-actions" class="col-lg-9">
+        <div>
+            <button id="btn-unzip" class="btn btn-primary m-r-5">
+                Unzip and View your Files now!
+            </button>
+
+            <br />
+            <span class="text-info">You can then download or save to Drive separated files in the zip</span>
+        </div>
+        <p id="lbl-working" class="text-warning mt-1 invisible">Processing your files...</p>
+    </div>
+
+</div>
+
+<hr />
+
+<div class="text-center">
+    <div id="sp-0" class="sp sp-wide">
+        <p class="text-right"><span data-language="SponsoredLink">Sponsored Link:</span></p>
+
+        <div class="sp-container">
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> <!-- 728 x 90 --> <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-6475235154742772" data-ad-slot="1982829070"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script defer src="~/js/unzip.js" asp-append-version="true"></script>
+
+    <script defer src="https://apis.google.com/js/api.js?onload=onGoogleApiLoaded"></script>
+
+}

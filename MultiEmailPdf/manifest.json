@@ -1,0 +1,48 @@
+{
+    "manifest_version": 2,
+    "name": "Gmail to PDF",
+    "author": " Luke Vo",
+    "description": "You can convert your emails in Gmail into PDF files easily.",
+    "version": "1.0",
+    "permissions": [ "activeTab", "*://mail.google.com/*", "downloads", "tabs" ],
+
+    "icons": {
+        "16": "pdf16.png",
+        "48": "pdf48.png",
+        "128": "pdf128.png"
+    },
+
+    "browser_action": {
+        "default_icon": {
+            "16": "pdf16.png",
+            "48": "pdf48.png",
+            "128": "pdf128.png"
+        },
+        "default_title": "Gmail to PDF"
+    },
+
+    "content_scripts": [
+        {
+            "matches": [ "*://mail.google.com/*" ],
+            "js": [ "js/sweetalert.min.js", "js/main.js" ],
+            "run_at": "document_end"
+        },
+        {
+            "matches": [ "*://mail.google.com/mail/u/*/*&view=pt&*" ],
+            "run_at": "document_start",
+            "js": [
+                "js/view.js"
+            ],
+            "all_frames": true
+        }
+    ],
+    "background": {
+        "scripts": [
+            "js/common.js"
+        ]
+    },
+    "web_accessible_resources": [
+        "images/*.png",
+        "assets/*.ttf"
+    ]
+}

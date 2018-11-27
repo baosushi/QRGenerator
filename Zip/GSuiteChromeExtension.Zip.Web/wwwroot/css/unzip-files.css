@@ -1,0 +1,7 @@
+﻿.list-files > div {
+  padding: 10px 0;
+  transition: all ease-in-out .25s; }
+  .list-files > div .data-folder a[data-link] {
+    cursor: pointer; }
+  .list-files > div:hover {
+    background-color: #edeae4; }

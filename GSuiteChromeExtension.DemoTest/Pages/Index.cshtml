@@ -1,0 +1,47 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div id="loader"
+     data-client-id="550789255072-mg3jllrmvguojv6v3m27n6gifus7pl84.apps.googleusercontent.com"
+     data-developer-key="AIzaSyBvaL6Cs19Ubf51EbpZ7DdUiXIECCJ-rfo"
+     data-app-id="550789255072"
+     class="d-none"></div>
+
+<div class="mt-5">
+    <button id="btn-select-file" class="btn btn-primary" disabled>
+        Select File from Google Drive
+    </button>
+
+    <span>Selected: <span id="lbl-selected-filename">None</span></span>
+</div>
+
+<hr />
+
+<div>
+    <p>Enter new name (leave it empty to use the same name):</p>
+
+
+    <p>
+        <input id="txt-filename" class="form-control" disabled />
+    </p>
+
+    <p>
+        <button id="btn-save-to-drive" class="btn btn-primary" disabled>Save to Drive</button>
+    </p>
+
+    <p>
+        <div id="btn-drive-button"></div>
+    </p>
+</div>
+
+@section Scripts {
+
+    <script defer src="https://apis.google.com/js/platform.js" ></script>
+    <script defer src="~/js/drive.js" asp-append-version="true"></script>
+
+    <script defer src="https://apis.google.com/js/api.js?onload=onGoogleApiLoaded"></script>
+
+}

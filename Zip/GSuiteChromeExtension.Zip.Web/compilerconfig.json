@@ -1,0 +1,10 @@
+﻿[
+  {
+    "outputFile": "wwwroot/css/design1.css",
+    "inputFile": "wwwroot/css/design1.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/unzip-files.css",
+    "inputFile": "wwwroot/css/unzip-files.scss"
+  }
+]

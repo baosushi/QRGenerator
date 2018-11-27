@@ -1,0 +1,123 @@
+﻿@page "/unzip-files/{id}"
+
+@inject WebSettings webSettings;
+
+@{
+    this.ViewBag.Title = "Unzip Files";
+
+    var id = this.RouteData.Values["id"].ToString();
+    var path = this.Request.Query["path"].ToString() ?? "";
+
+    var pathItems = path.Split('\\');
+    var currentPath = "";
+}
+
+@section Heads {
+
+    <link async rel="stylesheet" href="~/css/unzip-files.min.css" asp-append-version="true" />
+
+}
+
+<div id="loader"
+     data-client-id="@(this.webSettings.Google.ClientId)"
+     data-scope="https://www.googleapis.com/auth/drive"
+     data-server="@(this.webSettings.ApiServer)"
+     data-path="@(path)"
+     data-id="@(id)"></div>
+
+<h2>Unzip Files</h2>
+<p>Quickly unzip your files online to download or save to Google Drive.</p>
+
+<hr />
+
+<div class="text-center">
+    <div id="sp-0" class="sp sp-wide">
+        <p class="text-right"><span data-language="SponsoredLink">Sponsored Link:</span></p>
+
+        <div class="sp-container">
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> <!-- 728 x 90 --> <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-6475235154742772" data-ad-slot="1982829070"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<div id="pnl-files">
+    <p id="lbl-loading" class="text-center text-info">Loading file list, please wait...</p>
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="/unzip-files/@(this.Html.Encode(id))">Top</a>
+        </li>
+
+        @foreach (var pathItem in pathItems)
+        {
+            if (string.IsNullOrEmpty(pathItem))
+            {
+                continue;
+            }
+
+            currentPath += "\\" + pathItem;
+            var url = $"/unzip-files/{this.Html.Encode(id)}?path={this.Html.Encode(currentPath)}";
+
+            <li class="breadcrumb-item">
+                <a href="@(url)">@(pathItem)</a>
+            </li>
+        }
+    </ol>
+
+    <div id="lst-files" class="list-files">
+
+    </div>
+</div>
+
+<div class="mt-5">
+    <a href="/unzip">Unzip another file</a>
+</div>
+
+<hr />
+
+<div class="text-center">
+    <div id="sp-0" class="sp sp-wide">
+        <p class="text-right"><span data-language="SponsoredLink">Sponsored Link:</span></p>
+
+        <div class="sp-container">
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> <!-- 728 x 90 --> <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-6475235154742772" data-ad-slot="1982829070"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </div>
+</div>
+
+<template id="template-folder">
+    <div class="row" data-folder>
+        <div class="col">
+            <a data-link>
+                <img class="img-inline" src="~/img/folder.png" />
+                <span data-name></span>
+            </a>
+        </div>
+    </div>
+</template>
+
+<template id="template-file">
+    <div class="row" data-folder>
+        <div class="col">
+            <a data-link>
+                <img class="img-inline" src="~/img/file.png" />
+                <span data-name></span>
+            </a>
+        </div>
+        <div class="col col-auto">
+            <a data-link class="btn btn-primary">Download</a>
+            <div data-download-drive></div>
+        </div>
+    </div>
+</template>
+
+@section Scripts {
+
+    <script defer src="https://apis.google.com/js/platform.js"></script>
+    <script defer src="~/js/unzip-files.js" asp-append-version="true"></script>
+
+}

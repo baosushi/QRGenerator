@@ -1,0 +1,22 @@
+{
+    "SponsoredLink": "Sponsored Link:",
+    "Title": "Zip File Tab",
+    "Footer_Home": "Home",
+    "Footer_PP": "Privacy Policy",
+    "Footer_Terms": "Terms of Use",
+    "Footer_Contact": "Contact Us",
+    "Zip_Title": "Zip Files",
+    "Zip_Description": "Quickly zip your files into a single file with popular zip formats.",
+    "Zip_HelpChooseFile": "Choose the files you want to zip",
+    "File_Upload": "Upload from your computer",
+    "File_Drive": "Select from Google Drive",
+    "File_DriveSelect": "Load from Google Drive",
+    "File_NoFile": "No file selected",
+    "Zip_OutputExtension": "Choose output extension",
+    "Zip_Download": "Zip and Download Now!",
+    "Zip_SaveDrive": "Zip and Save to Google Drive",
+    "File_Processing": "Processing your files...",
+    "SaveToDrive_Title": "Save to Google Drive",
+    "SaveToDrive_Help": "Your file is ready. Click the \"Save\" button below to save to your Google Drive.",
+    "Dialog_Close": "Close"
+}
