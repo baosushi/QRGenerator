@@ -8,13 +8,13 @@ namespace GSuiteChromeExtension.QRGenerator.Web.Models
 
     public class WebSettings
     {
-
-        public string ApiServer { get; set; }
         public GoogleSettings Google { get; set; }
 
         public class GoogleSettings
         {
             public string ClientId { get; set; }
+            public string DeveloperKey { get; set; }
+            public string ProjectNumber { get; set; }
         }
 
     }

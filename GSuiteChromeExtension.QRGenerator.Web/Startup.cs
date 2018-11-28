@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace GSuiteChromeExtension.Pdf.Web
+namespace GSuiteChromeExtension.QRGenerator.Web
 {
     public class Startup
     {

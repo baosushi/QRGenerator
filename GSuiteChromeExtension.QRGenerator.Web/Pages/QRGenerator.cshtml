@@ -1,0 +1,121 @@
+﻿@page "/qr-generator"
+
+@inject WebSettings webSettings;
+
+@{
+    var title = this.texts.GetText("QRGenerator_Title");
+    this.ViewBag.Title = title;
+}
+
+<div id="loader"
+     data-client-id="@(this.webSettings.Google.ClientId)"
+     data-developer-key="@(this.webSettings.Google.DeveloperKey)"
+     data-app-id="@(this.webSettings.Google.ProjectNumber)"
+     class="d-none"></div>
+
+<h2>@(title)</h2>
+<p>@this.texts.GetText("QRGenerator_Description")</p>
+
+<hr />
+
+<p class="text-info">@this.texts.GetText("QRGenerator_ChooseFileHelp")</p>
+
+<div class="text-center">
+    <div id="sp-0" class="sp sp-wide">
+        <p class="text-right"><span>@this.texts.GetText("SponsoredLink")</span></p>
+
+        <div class="sp-container">
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> <!-- 728 x 90 --> <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-6475235154742772" data-ad-slot="1982829070"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<div class="form-group row">
+    <div class="col-lg-3">
+        <div class="row">
+            <label class="col-lg-12 col-form-label">
+                <input type="radio" name="generate-type" value="folder" checked />
+                @this.texts.GetText("Generate_Folder")
+            </label>
+            <label class="col-lg-12 col-form-label">
+                <input type="radio" name="generate-type" value="file" />
+                @this.texts.GetText("Generate_File")
+            </label>
+        </div>
+    </div>
+    <div class="col-lg-9 my-auto">
+        <button id="btn-select-file" class="btn">
+            <img src="~/images/logo-drive.png" class="img-inline" />
+            @this.texts.GetText("Generate_Picker")
+        </button>
+        <span>Selected: <span id="lbl-selected-filename">None</span></span>
+    </div>
+</div>
+
+<hr />
+
+<div class="row">
+    <div class="col-lg-3"></div>
+    <div id="pnl-actions" class="col-lg-9">
+        <div>
+            <button id="btn-convert-download" class="btn btn-primary m-r-5">
+                @this.texts.GetText("QRGenerator_Download")
+            </button>
+
+            <button id="btn-convert-save-drive" class="btn">
+                <img src="~/images/logo-drive.png" class="img-inline" />
+                @this.texts.GetText("QRGenerator_SaveDrive")
+            </button>
+        </div>
+        <p id="lbl-working" class="text-warning mt-1 invisible">@this.texts.GetText("File_Processing")</p>
+    </div>
+
+</div>
+
+<hr />
+
+<div class="text-center">
+    <div id="sp-0" class="sp sp-wide">
+        <p class="text-right"><span>@this.texts.GetText("SponsoredLink")</span></p>
+
+        <div class="sp-container">
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> <!-- 728 x 90 --> <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-6475235154742772" data-ad-slot="1982829070"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </div>
+</div>
+
+<div id="diag-save-to-drive" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><img class="img-inline" src="~/img/logo-drive.png" /> Save to Google Drive</h5>
+            </div>
+
+            <div class="modal-body">
+                <p>
+                    @this.texts.GetText("SaveToDrive_Help")
+                </p>
+
+                <div id="btn-save-to-drive" class="btn-save-to-drive"></div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    @this.texts.GetText("Dialog_Close")
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script defer src="https://apis.google.com/js/platform.js"></script>
+    <script defer src="~/js/drive.js" asp-append-version="true"></script>
+    <script defer src="https://apis.google.com/js/api.js?onload=onGoogleApiLoaded"></script>
+
+}

@@ -33,13 +33,30 @@ function createPicker() {
     var developerKey = $("[data-developer-key]").attr("data-developer-key");
     var appId = $("[data-app-id]").attr("data-app-id");
 
+    var docsView = new google.picker.DocsView();
+    
+    if ($("input[name='generate-type']").val() === "folder") {
+        docsView = docsView.setMimeTypes('application/vnd.google-apps.folder').setIncludeFolders(true).setSelectFolderEnabled(true);;
+    } else {
+        docsView = docsView.setIncludeFolders(false).setSelectFolderEnabled(false);
+    }
+
     var picker = new google.picker.PickerBuilder()
-        .addView(google.picker.ViewId.DOCS)
+        .addView(docsView)
+        .enableFeature(google.picker.Feature.NAV_HIDDEN)
         .setAppId(appId)
-        .setDeveloperKey(developerKey)
+        .hideTitleBar()
         .setOAuthToken(oauthToken)
         .setCallback(pickerCallback)
         .build();
+
+    //var picker = new google.picker.PickerBuilder()
+    //    .addView(google.picker.ViewId.DOCS)
+    //    .setAppId(appId)
+    //    .setDeveloperKey(developerKey)
+    //    .setOAuthToken(oauthToken)
+    //    .setCallback(pickerCallback)
+    //    .build();
     picker.setVisible(true);
 }
 
