@@ -34,8 +34,8 @@ function createPicker() {
     var appId = $("[data-app-id]").attr("data-app-id");
 
     var docsView = new google.picker.DocsView();
-    
-    if ($("input[name='generate-type']").val() === "folder") {
+
+    if ($("input[name='generate-type']:checked").val() === "folder") {
         docsView = docsView.setMimeTypes('application/vnd.google-apps.folder').setIncludeFolders(true).setSelectFolderEnabled(true);;
     } else {
         docsView = docsView.setIncludeFolders(false).setSelectFolderEnabled(false);
@@ -75,23 +75,25 @@ function pickerCallback(info) {
 
 function onSaveButtonClick() {
     $.ajax({
-        url: "/api/demo/download",
+        url: "/api/generator/generate",
         method: "POST",
         contentType: "application/json",
         data: JSON.stringify({
             Token: oauthToken,
             File: driveFileInfo.docs[0],
-        }),
-    })
-        .done(response => {
-            var filename = $("#txt-filename").val() || driveFileInfo.docs[0].name;
+            IsFolder: driveFileInfo.docs[0].type === "folder",
+            WithDescription: false,
+            Repetition: 1
+        })
+    }).done(response => {
+        var filename = $("#txt-filename").val() || driveFileInfo.docs[0].name;
 
-            gapi.savetodrive.render("btn-drive-button", {
-                src: response.path,
-                filename: filename,
-                sitename: 'Drive Test'
-            });
+        gapi.savetodrive.render("btn-drive-button", {
+            src: response.path,
+            filename: filename,
+            sitename: 'Drive Test'
         });
+    });
 }
 
 function checkAvailable() {
