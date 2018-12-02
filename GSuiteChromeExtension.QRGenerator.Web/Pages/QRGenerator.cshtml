@@ -34,6 +34,27 @@
 <hr />
 
 <div class="form-group row">
+    <div class="col-lg-6">
+        <div class="row">
+            <label class="col-lg-3 col-form-label">
+                Repetition:
+            </label>
+            <div class="col-lg-6">
+                <input type="number" min="1" id="repetition" value="1" class="form-control" />
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="row">
+            <label class="col-lg-12 col-form-label">
+                <input type="checkbox" id="with-description" />
+                Generate with description
+            </label>
+        </div>
+    </div>
+</div>
+
+<div class="form-group row">
     <div class="col-lg-3">
         <div class="row">
             <label class="col-lg-12 col-form-label">
@@ -65,10 +86,7 @@
                 @this.texts.GetText("QRGenerator_Download")
             </button>
 
-            <button id="btn-convert-save-drive" class="btn">
-                <img src="~/images/logo-drive.png" class="img-inline" />
-                @this.texts.GetText("QRGenerator_SaveDrive")
-            </button>
+            <div id="btn-drive-button"></div>
         </div>
         <p id="lbl-working" class="text-warning mt-1 invisible">@this.texts.GetText("File_Processing")</p>
     </div>
