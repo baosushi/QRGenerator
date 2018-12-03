@@ -18,7 +18,7 @@ function onSelectFileButtonClick() {
 
     gapi.auth2.authorize({
         client_id: clientId,
-        scope: scope,
+        scope: scope
     }, handleAuthResult);
 }
 

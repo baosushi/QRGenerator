@@ -1,7 +1,7 @@
 {
   "SponsoredLink": "Sponsored Link:",
   "Optional": "(optional)",
-  "Title": "PDF Converted",
+  "Title": "QR Generator",
   "Footer_Home": "Home",
   "Footer_PP": "Privacy Policy",
   "Footer_Terms": "Terms of Use",
@@ -15,13 +15,13 @@
   "SaveToDrive_Title": "Save to Google Drive",
   "SaveToDrive_Help": "Your file is ready. Click the \"Save\" button below to save to your Google Drive.",
   "Dialog_Close": "Close",
-  "ToPdf_Title": "Convert Documents to PDF",
-  "ToPdf_Description": "Quickly convert your Word file into PDF.",
-  "ToPdf_ChooseFileHelp": "Choose the files you want to convert",
-  "ToPdf_ConvertDownload": "Convert and Download Now!",
-  "ToPdf_ConvertSaveDrive": "Convert and Save to Google Drive",
-  "FromPdf_Title": "Convert PDF to Documents and Images",
-  "FromPdf_Description": "Quickly convert your PDF file into other formats.",
-  "FromPdf_FormatHelp": "Choose the output format",
-  "Generate_Picker": "Browse..."
+  "QRGenerator_GeneratePicker": "Browse...",
+  "QRGenerator_Title": "QR Generator",
+  "QRGenerator_Description": "Generate QR Code for links to your drive shared files.",
+  "QRGenerator_GenerateFolder": "Select a folder",
+  "QRGenerator_GenerateFile": "Select a file",
+  "QRGenerator_Generate": "Generate QR",
+  "QRGenerator_SaveDrive": "Save to Drive",
+  "QRGenerator_Selected": "Selected: ",
+  "QRGenerator_None": "None"
 }

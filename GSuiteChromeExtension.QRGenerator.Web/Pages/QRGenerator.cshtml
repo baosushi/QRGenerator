@@ -18,8 +18,6 @@
 
 <hr />
 
-<p class="text-info">@this.texts.GetText("QRGenerator_ChooseFileHelp")</p>
-
 <div class="text-center">
     <div id="sp-0" class="sp sp-wide">
         <p class="text-right"><span>@this.texts.GetText("SponsoredLink")</span></p>
@@ -38,20 +36,20 @@
         <div class="row">
             <label class="col-lg-12 col-form-label">
                 <input type="radio" name="generate-type" value="folder" checked />
-                @this.texts.GetText("Generate_Folder")
+                @this.texts.GetText("QRGenerator_GenerateFolder")
             </label>
             <label class="col-lg-12 col-form-label">
                 <input type="radio" name="generate-type" value="file" />
-                @this.texts.GetText("Generate_File")
+                @this.texts.GetText("QRGenerator_GenerateFile")
             </label>
         </div>
     </div>
     <div class="col-lg-9 my-auto">
         <button id="btn-select-file" class="btn">
             <img src="~/images/logo-drive.png" class="img-inline" />
-            @this.texts.GetText("Generate_Picker")
+            @this.texts.GetText("QRGenerator_GeneratePicker")
         </button>
-        <span>Selected: <span id="lbl-selected-filename">None</span></span>
+        <span><span>@this.texts.GetText("QRGenerator_Selected")</span><span id="lbl-selected-filename">@this.texts.GetText("QRGenerator_None")</span></span>
     </div>
 </div>
 
@@ -62,7 +60,7 @@
     <div id="pnl-actions" class="col-lg-9">
         <div>
             <button id="btn-save-to-drive" class="btn btn-primary m-r-5">
-                @this.texts.GetText("QRGenerator_Download")
+                @this.texts.GetText("QRGenerator_Generate")
             </button>
 
             <button id="btn-convert-save-drive" class="btn">
