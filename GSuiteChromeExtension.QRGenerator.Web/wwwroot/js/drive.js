@@ -82,16 +82,16 @@ function onSaveButtonClick() {
             Token: oauthToken,
             File: driveFileInfo.docs[0],
             IsFolder: driveFileInfo.docs[0].type === "folder",
-            WithDescription: false,
-            Repetition: 1
+            WithDescription: $("#with-description").is(":checked"),
+            Repetition: $("#repetition").val()
         })
     }).done(response => {
-        var filename = $("#txt-filename").val() || driveFileInfo.docs[0].name;
+        var filename = driveFileInfo.docs[0].id + ".docx";
 
         gapi.savetodrive.render("btn-drive-button", {
             src: response.path,
             filename: filename,
-            sitename: 'Drive Test'
+            sitename: 'QRGenerator'
         });
     });
 }
