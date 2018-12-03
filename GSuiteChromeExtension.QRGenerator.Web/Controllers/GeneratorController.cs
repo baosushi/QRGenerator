@@ -67,7 +67,7 @@ namespace GSuiteChromeExtension.QRGenerator.Web.Controllers
                             r0.SetText("");
                             r0.AddBreak(BreakType.TEXTWRAPPING);
                             var rPic = para.CreateRun();
-                            rPic.AddPicture(ms, (int)PictureType.PNG, request.File.Name, 150 * Units.EMU_PER_PIXEL, 150 * Units.EMU_PER_PIXEL);
+                            rPic.AddPicture(ms, (int)PictureType.PNG, file.Name, 150 * Units.EMU_PER_PIXEL, 150 * Units.EMU_PER_PIXEL);
                             rPic.AddBreak(BreakType.TEXTWRAPPING);
                             para.Alignment = ParagraphAlignment.CENTER;
                             
@@ -118,10 +118,10 @@ namespace GSuiteChromeExtension.QRGenerator.Web.Controllers
                             r0.SetText("");
                             r0.AddBreak(BreakType.TEXTWRAPPING);
                             var rPic = para.CreateRun();
-                            rPic.AddPicture(ms, (int)PictureType.PNG, request.File.Name, 150 * Units.EMU_PER_PIXEL, 150 * Units.EMU_PER_PIXEL);
+                            rPic.AddPicture(ms, (int)PictureType.PNG, file.Name, 150 * Units.EMU_PER_PIXEL, 150 * Units.EMU_PER_PIXEL);
                             rPic.AddBreak(BreakType.TEXTWRAPPING);
                             var r1 = para.CreateRun();
-                            r1.SetText(request.File.Name);
+                            r1.SetText(file.Name);
                             para.Alignment = ParagraphAlignment.CENTER;
 
                             for (var i = 0; i < request.Repetition; i++)
