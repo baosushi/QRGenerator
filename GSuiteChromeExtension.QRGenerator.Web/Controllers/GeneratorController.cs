@@ -9,8 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using NPOI.Util;
-using NPOI.XWPF.UserModel;
+using Novacode;
 
 namespace GSuiteChromeExtension.QRGenerator.Web.Controllers
 {
@@ -27,12 +26,7 @@ namespace GSuiteChromeExtension.QRGenerator.Web.Controllers
         [HttpPost, Route("generate")]
         public async Task<IActionResult> Generate([FromBody]GenerateRequestViewModel request)
         {
-            XWPFDocument doc = null;
-            using (var stream = new FileStream(Path.Combine(env.WebRootPath, "Template", "Template.docx"), FileMode.Open))
-            {
-                doc = new XWPFDocument(stream);
-            }
-            //XWPFDocument doc = XWPFFactory.
+            var doc = DocX.Create(Path.Combine(env.WebRootPath, "Upload", $"{request.File.Id}.docx"));
 
             if (request.IsFolder)
             {
@@ -43,8 +37,9 @@ namespace GSuiteChromeExtension.QRGenerator.Web.Controllers
                 {
                     if (request.WithDescription)
                     {
-                        XWPFTable table = doc.CreateTable(folder.Files.Count * request.Repetition, 2);
-                        table.Width = 5072;
+                        var table = doc.AddTable(folder.Files.Count * request.Repetition, 2);
+                        table.Alignment = Alignment.center;
+                        table.SetWidthsPercentage(new[] { 30f, 70f }, 595);
                         int count = 0;
 
                         foreach (var file in folder.Files)
@@ -67,33 +62,33 @@ namespace GSuiteChromeExtension.QRGenerator.Web.Controllers
                                 //forbidden, proxy issues, file not found (404) etc
                             }
 
-                            XWPFParagraph para = doc.CreateParagraph();
-                            XWPFRun r0 = para.CreateRun();
-                            r0.SetText("");
-                            r0.AddBreak(BreakType.TEXTWRAPPING);
-                            var rPic = para.CreateRun();
-                            rPic.AddPicture(ms, (int)PictureType.PNG, file.Name, 150 * Units.EMU_PER_PIXEL, 150 * Units.EMU_PER_PIXEL);
-                            rPic.AddBreak(BreakType.TEXTWRAPPING);
-                            para.Alignment = ParagraphAlignment.CENTER;
+                            var image = doc.AddImage(ms, "image/png");
+                            var picture = image.CreatePicture();
 
                             for (int i = 0; i < request.Repetition; i++)
                             {
                                 var row = table.Rows[count];
-                                row.GetCell(0).SetParagraph(para);
-                                var cell1P = row.GetCell(1).AddParagraph();
-                                var cell1R = cell1P.CreateRun();
-                                cell1R.SetText(file.Name);
-                                cell1P.Alignment = ParagraphAlignment.CENTER;
-                                cell1P.VerticalAlignment = TextAlignment.CENTER;
+                                row.Cells[0].MarginLeft = 0;
+                                var para1 = row.Cells[0].InsertParagraph();
+                                para1.AppendPicture(picture);
+                                para1.Alignment = Alignment.center;
+
+                                row.Cells[1].MarginLeft = 0;
+                                row.Cells[1].MarginTop = 0;
+                                row.Cells[1].VerticalAlignment = VerticalAlignment.Center;
+                                var para2 = row.Cells[1].InsertParagraph();
+                                para2.InsertText(file.Name);
+                                para2.Alignment = Alignment.center;
                                 count++;
                             }
-
-                            doc.RemoveBodyElement(doc.GetPosOfParagraph(para));
                         }
+
+                        doc.InsertTable(table);
                     }
                     else
                     {
-                        XWPFTable table = doc.CreateTable((int)Math.Ceiling(folder.Files.Count * request.Repetition / 4.0), 4);
+                        var table = doc.AddTable((int)Math.Ceiling(folder.Files.Count * request.Repetition / 4.0), 4);
+                        table.Alignment = Alignment.center;
                         var row = table.Rows[0];
                         var rowCount = 0;
                         var count = 0;
@@ -101,9 +96,7 @@ namespace GSuiteChromeExtension.QRGenerator.Web.Controllers
                         foreach (var file in folder.Files)
                         {
                             byte[] imageData = null;
-                            MemoryStream ms;
-
-                            ms = null;
+                            MemoryStream ms = null;
 
                             try
                             {
@@ -118,16 +111,8 @@ namespace GSuiteChromeExtension.QRGenerator.Web.Controllers
                                 //forbidden, proxy issues, file not found (404) etc
                             }
 
-                            XWPFParagraph para = doc.CreateParagraph();
-                            XWPFRun r0 = para.CreateRun();
-                            r0.SetText("");
-                            r0.AddBreak(BreakType.TEXTWRAPPING);
-                            var rPic = para.CreateRun();
-                            rPic.AddPicture(ms, (int)PictureType.PNG, file.Name, 150 * Units.EMU_PER_PIXEL, 150 * Units.EMU_PER_PIXEL);
-                            rPic.AddBreak(BreakType.TEXTWRAPPING);
-                            var r1 = para.CreateRun();
-                            r1.SetText(file.Name);
-                            para.Alignment = ParagraphAlignment.CENTER;
+                            var image = doc.AddImage(ms, "image/png");
+                            var picture = image.CreatePicture();
 
                             for (var i = 0; i < request.Repetition; i++)
                             {
@@ -137,17 +122,23 @@ namespace GSuiteChromeExtension.QRGenerator.Web.Controllers
                                     row = table.Rows[++rowCount];
                                 }
 
-                                row.GetCell(count).SetParagraph(para);
+                                row.Cells[count].MarginLeft = 0;
+                                var para1 = row.Cells[count].InsertParagraph();
+                                para1.AppendPicture(picture);
+                                para1.Alignment = Alignment.center;
+                                var para2 = row.Cells[count].InsertParagraph();
+                                para2.InsertText(file.Name);
+                                para2.Alignment = Alignment.center;
                                 count++;
                             }
-
-                            doc.RemoveBodyElement(doc.GetPosOfParagraph(para));
                         }
+
+                        doc.InsertTable(table);
                     }
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("wtf: " + e.Message);
+                    return this.StatusCode(500, e.Message);
                 }
             }
             else
@@ -157,35 +148,8 @@ namespace GSuiteChromeExtension.QRGenerator.Web.Controllers
 
                 try
                 {
-                    //XWPFDocument doc = new XWPFDocument();
-                    //XWPFParagraph para = doc.CreateParagraph();
-                    //XWPFRun r0 = para.CreateRun();
-                    //r0.SetText("Title1");
-                    //para.BorderTop = Borders.Thick;
-                    //para.FillBackgroundColor = "EEEEEE";
-                    //para.FillPattern = NPOI.OpenXmlFormats.Wordprocessing.ST_Shd.diagStripe;
-
-
-                    //table.GetRow(1).GetCell(1).SetText("EXAMPLE OF TABLE");
-
-                    //XWPFTableCell c1 = table.GetRow(0).GetCell(0);
-                    //XWPFParagraph p1 = c1.AddParagraph();   //don't use doc.CreateParagraph
-                    //XWPFRun r1 = p1.CreateRun();
-                    //r1.SetText("The quick brown fox");
-                    //r1.IsBold = true;
-
-                    //r1.FontFamily = "Courier";
-                    //r1.SetUnderline(UnderlinePatterns.DotDotDash);
-                    //r1.SetTextPosition(100);
-                    //c1.SetColor("FF0000");
-
-
-                    //table.GetRow(2).GetCell(2).SetText("only text");
-
                     byte[] imageData = null;
-                    MemoryStream ms;
-
-                    ms = null;
+                    MemoryStream ms = null;
 
                     try
                     {
@@ -200,72 +164,67 @@ namespace GSuiteChromeExtension.QRGenerator.Web.Controllers
                         //forbidden, proxy issues, file not found (404) etc
                     }
 
+                    var image = doc.AddImage(ms, "image/png");
+                    var picture = image.CreatePicture();
+
                     if (request.WithDescription)
                     {
-                        XWPFParagraph para = doc.CreateParagraph();
-                        XWPFRun r0 = para.CreateRun();
-                        r0.SetText("");
-                        r0.AddBreak(BreakType.TEXTWRAPPING);
-                        var rPic = para.CreateRun();
-                        rPic.AddPicture(ms, (int)PictureType.PNG, request.File.Name, 150 * Units.EMU_PER_PIXEL, 150 * Units.EMU_PER_PIXEL);
-                        rPic.AddBreak(BreakType.TEXTWRAPPING);
-                        para.Alignment = ParagraphAlignment.CENTER;
-
-                        XWPFTable table = doc.CreateTable(request.Repetition, 2);
-                        table.Width = 5072;
+                        var table = doc.AddTable(request.Repetition, 2);
+                        table.Alignment = Alignment.center;
+                        table.SetWidthsPercentage(new[] { 30f, 70f }, 595);
 
                         foreach (var row in table.Rows)
                         {
-                            row.GetCell(0).SetParagraph(para);
-                            var cell1P = row.GetCell(1).AddParagraph();
-                            var cell1R = cell1P.CreateRun();
-                            cell1R.SetText(item.Name);
-                            cell1P.Alignment = ParagraphAlignment.CENTER;
-                            cell1P.VerticalAlignment = TextAlignment.CENTER;
+                            row.Cells[0].MarginLeft = 0;
+                            var para1 = row.Cells[0].InsertParagraph();
+                            para1.AppendPicture(picture);
+                            para1.Alignment = Alignment.center;
+
+                            row.Cells[1].MarginLeft = 0;
+                            row.Cells[1].MarginTop = 0;
+                            row.Cells[1].VerticalAlignment = VerticalAlignment.Center;
+                            var para2 = row.Cells[1].InsertParagraph();
+                            para2.InsertText(item.Name);
+                            para2.Alignment = Alignment.center;
                         }
 
-                        doc.RemoveBodyElement(doc.GetPosOfParagraph(para));
+                        doc.InsertTable(table);
                     }
                     else
                     {
-                        XWPFParagraph para = doc.CreateParagraph();
-                        XWPFRun r0 = para.CreateRun();
-                        r0.SetText("");
-                        r0.AddBreak(BreakType.TEXTWRAPPING);
-                        var rPic = para.CreateRun();
-                        rPic.AddPicture(ms, (int)PictureType.PNG, request.File.Name, 150 * Units.EMU_PER_PIXEL, 150 * Units.EMU_PER_PIXEL);
-                        rPic.AddBreak(BreakType.TEXTWRAPPING);
-                        var r1 = para.CreateRun();
-                        r1.SetText(request.File.Name);
-                        para.Alignment = ParagraphAlignment.CENTER;
-
-                        XWPFTable table = doc.CreateTable((int)Math.Ceiling(request.Repetition / 4.0), 4);
+                        var table = doc.AddTable((int)Math.Ceiling(request.Repetition / 4.0), 4);
+                        table.Alignment = Alignment.center;
+                        table.Design = TableDesign.TableGrid;
                         var count = 0;
 
                         for (int i = 0; i < table.Rows.Count && count < request.Repetition; i++)
                         {
                             for (int j = 0; j < 4 && count < request.Repetition; j++)
                             {
-                                table.GetRow(i).GetCell(j).SetParagraph(para);
+                                table.Rows[i].Cells[j].MarginLeft = 0;
+                                var para1 = table.Rows[i].Cells[j].InsertParagraph();
+                                para1.AppendPicture(picture);
+                                para1.Alignment = Alignment.center;
+                                var para2 = table.Rows[i].Cells[j].InsertParagraph();
+                                para2.InsertText(item.Name, false);
+                                para2.Alignment = Alignment.center;
                                 count++;
                             }
                         }
 
-                        doc.RemoveBodyElement(doc.GetPosOfParagraph(para));
+                        doc.InsertTable(table);
                     }
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("wtf: " + e.Message);
+                    return this.StatusCode(500, e.Message);
                 }
             }
 
             var path = Path.Combine(env.WebRootPath, "Upload");
             Directory.CreateDirectory(path);
 
-            FileStream out1 = new FileStream(Path.Combine(path, $"{request.File.Id}.docx"), FileMode.Create);
-            doc.Write(out1);
-            out1.Close();
+            doc.Save();
 
             return this.Ok(new
             {

@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\Upload\**" />
+    <Content Remove="wwwroot\Upload\**" />
+    <EmbeddedResource Remove="wwwroot\Upload\**" />
+    <None Remove="wwwroot\Upload\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="compilerconfig.json" />
     <Content Remove="credentials.json" />
   </ItemGroup>
@@ -15,9 +22,9 @@
 
   <ItemGroup>
     <PackageReference Include="BuildWebCompiler" Version="1.12.394" />
+    <PackageReference Include="DocXCore" Version="1.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
-    <PackageReference Include="NPOI" Version="2.4.0" />
   </ItemGroup>
 
   <ItemGroup>
