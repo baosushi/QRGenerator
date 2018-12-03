@@ -27,7 +27,12 @@ namespace GSuiteChromeExtension.QRGenerator.Web.Controllers
         [HttpPost, Route("generate")]
         public async Task<IActionResult> Generate([FromBody]GenerateRequestViewModel request)
         {
-            XWPFDocument doc = new XWPFDocument();
+            XWPFDocument doc = null;
+            using (var stream = new FileStream(Path.Combine(env.WebRootPath, "Template", "Template.docx"), FileMode.Open))
+            {
+                doc = new XWPFDocument(stream);
+            }
+            //XWPFDocument doc = XWPFFactory.
 
             if (request.IsFolder)
             {
@@ -70,7 +75,7 @@ namespace GSuiteChromeExtension.QRGenerator.Web.Controllers
                             rPic.AddPicture(ms, (int)PictureType.PNG, file.Name, 150 * Units.EMU_PER_PIXEL, 150 * Units.EMU_PER_PIXEL);
                             rPic.AddBreak(BreakType.TEXTWRAPPING);
                             para.Alignment = ParagraphAlignment.CENTER;
-                            
+
                             for (int i = 0; i < request.Repetition; i++)
                             {
                                 var row = table.Rows[count];
