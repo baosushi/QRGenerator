@@ -35,11 +35,11 @@ function createPicker() {
 
     var docsView = new google.picker.DocsView();
 
-    if ($("input[name='generate-type']:checked").val() === "folder") {
-        docsView = docsView.setMimeTypes('application/vnd.google-apps.folder').setIncludeFolders(true).setSelectFolderEnabled(true);;
-    } else {
-        docsView = docsView.setIncludeFolders(false).setSelectFolderEnabled(false);
-    }
+    //if ($("input[name='generate-type']:checked").val() === "folder") {
+    //    docsView = docsView.setMimeTypes('application/vnd.google-apps.folder').setIncludeFolders(true).setSelectFolderEnabled(true);;
+    //} else {
+    docsView = docsView.setIncludeFolders(false).setSelectFolderEnabled(false);
+    //}
 
     var picker = new google.picker.PickerBuilder()
         .addView(docsView)
@@ -48,6 +48,7 @@ function createPicker() {
         .hideTitleBar()
         .setOAuthToken(oauthToken)
         .setCallback(pickerCallback)
+        //.enableFeature(google.picker.Feature.MULTISELECT_ENABLED)
         .build();
 
     //var picker = new google.picker.PickerBuilder()
@@ -81,7 +82,6 @@ function onSaveButtonClick() {
         data: JSON.stringify({
             Token: oauthToken,
             File: driveFileInfo.docs[0],
-            IsFolder: driveFileInfo.docs[0].type === "folder",
             WithDescription: $("#with-description").is(":checked"),
             Repetition: $("#repetition").val()
         })
