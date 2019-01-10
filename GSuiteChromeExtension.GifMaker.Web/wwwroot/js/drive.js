@@ -1,6 +1,4 @@
-﻿var authLoaded, pickerLoaded;
-var oauthToken;
-var driveFileInfo;
+﻿var authLoaded, pickerLoaded, oauthToken, driveFileInfo;
 
 function onAuthApiLoad() {
     authLoaded = true;
@@ -33,13 +31,15 @@ function createPicker() {
     var developerKey = $("[data-developer-key]").attr("data-developer-key");
     var appId = $("[data-app-id]").attr("data-app-id");
 
-    var docsView = new google.picker.DocsView();
+    var docsView = new google.picker.DocsView()
+        .setIncludeFolders(false)
+        .setSelectFolderEnabled(false);
 
-    if ($("input[name='generate-type']:checked").val() === "folder") {
-        docsView = docsView.setMimeTypes('application/vnd.google-apps.folder').setIncludeFolders(true).setSelectFolderEnabled(true);;
-    } else {
-        docsView = docsView.setIncludeFolders(false).setSelectFolderEnabled(false);
-    }
+    //if ($("input[name='generate-type']:checked").val() === "folder") {
+    //    docsView = docsView.setMimeTypes('application/vnd.google-apps.folder').setIncludeFolders(true).setSelectFolderEnabled(true);;
+    //} else {
+    //docsView = docsView.setIncludeFolders(false).setSelectFolderEnabled(false);
+    //}
 
     var picker = new google.picker.PickerBuilder()
         .addView(docsView)
@@ -49,7 +49,7 @@ function createPicker() {
         .setOAuthToken(oauthToken)
         .setCallback(pickerCallback)
         .build();
-		
+
     picker.setVisible(true);
 }
 
@@ -59,11 +59,8 @@ function pickerCallback(info) {
     }
 
     driveFileInfo = info;
-    var firstFile = info.docs[0];
-    $("#lbl-selected-filename").html(firstFile.name);
 
-    $("#txt-filename").removeAttr("disabled");
-    $("#btn-save-to-drive").removeAttr("disabled");
+    getUserSelectedFile();
 }
 
 function onSaveButtonClick() {
@@ -105,5 +102,5 @@ function onGoogleApiLoaded() {
 
 $(function () {
     $("#btn-select-file").click(onSelectFileButtonClick);
-    $("#btn-save-to-drive").click(onSaveButtonClick)
+    $("#btn-save-to-drive").click(onSaveButtonClick);
 });

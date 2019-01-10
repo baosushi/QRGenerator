@@ -3,7 +3,7 @@
 @inject WebSettings webSettings;
 
 @{
-    var title = this.texts.GetText("QRGenerator_Title");
+    var title = this.texts.GetText("GifMaker_Title");
     this.ViewBag.Title = title;
 }
 
@@ -14,7 +14,7 @@
      class="d-none"></div>
 
 <h2>@(title)</h2>
-<p>@this.texts.GetText("QRGenerator_Description")</p>
+<p>@this.texts.GetText("GifMaker_Description")</p>
 
 <hr />
 
@@ -30,6 +30,27 @@
 </div>
 
 <hr />
+
+<div class="form-group row">
+    <div class="col-lg-6">
+        <div class="row">
+            <label class="col-lg-3 col-form-label">
+                Repetition:
+            </label>
+            <div class="col-lg-6">
+                <input type="number" min="1" id="repetition" value="1" class="form-control" />
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="row">
+            <label class="col-lg-12 col-form-label">
+                <input type="checkbox" id="with-description" />
+                Generate with description
+            </label>
+        </div>
+    </div>
+</div>
 
 <div class="form-group row">
     <div class="col-lg-3">
@@ -108,9 +129,8 @@
 </div>
 
 @section Scripts {
-
+    <script defer src="~/lib/gifshot/gifshot.js"></script>
     <script defer src="https://apis.google.com/js/platform.js"></script>
     <script defer src="~/js/drive.js" asp-append-version="true"></script>
     <script defer src="https://apis.google.com/js/api.js?onload=onGoogleApiLoaded"></script>
-
 }
