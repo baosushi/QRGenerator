@@ -15,13 +15,13 @@
   "SaveToDrive_Title": "Save to Google Drive",
   "SaveToDrive_Help": "Your file is ready. Click the \"Save\" button below to save to your Google Drive.",
   "Dialog_Close": "Close",
-  "QRGenerator_GeneratePicker": "Browse...",
-  "QRGenerator_Title": "QR Generator",
-  "QRGenerator_Description": "Generate QR Code for links to your drive shared files.",
-  "QRGenerator_GenerateFolder": "Select a folder",
-  "QRGenerator_GenerateFile": "Select a file",
-  "QRGenerator_Generate": "Generate QR",
-  "QRGenerator_SaveDrive": "Save to Drive",
-  "QRGenerator_Selected": "Selected: ",
-  "QRGenerator_None": "None"
+  "GifMaker_GeneratePicker": "Browse...",
+  "GifMaker_Title": "QR Generator",
+  "GifMaker_Description": "Generate QR Code for links to your drive shared files.",
+  "GifMaker_GenerateFolder": "Select a folder",
+  "GifMaker_GenerateFile": "Select a file",
+  "GifMaker_Generate": "Generate QR",
+  "GifMaker_SaveDrive": "Save to Drive",
+  "GifMaker_Selected": "Selected: ",
+  "GifMaker_None": "None"
 }

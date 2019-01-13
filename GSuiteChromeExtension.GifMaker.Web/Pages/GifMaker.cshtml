@@ -7,6 +7,12 @@
     this.ViewBag.Title = title;
 }
 
+@section Heads {
+    <link async href="~/lib/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+    <link async href="~/lib/jquery-ui/jquery-ui.structure.min.css" rel="stylesheet" />
+    <link async href="~/lib/jquery-ui/jquery-ui.theme.min.css" rel="stylesheet" />
+}
+
 <div id="loader"
      data-client-id="@(this.webSettings.Google.ClientId)"
      data-developer-key="@(this.webSettings.Google.DeveloperKey)"
@@ -32,45 +38,42 @@
 <hr />
 
 <div class="form-group row">
-    <div class="col-lg-6">
-        <div class="row">
-            <label class="col-lg-3 col-form-label">
-                Repetition:
-            </label>
-            <div class="col-lg-6">
-                <input type="number" min="1" id="repetition" value="1" class="form-control" />
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="row">
-            <label class="col-lg-12 col-form-label">
-                <input type="checkbox" id="with-description" />
-                Generate with description
-            </label>
-        </div>
-    </div>
-</div>
-
-<div class="form-group row">
-    <div class="col-lg-3">
-        <div class="row">
-            <label class="col-lg-12 col-form-label">
-                <input type="radio" name="generate-type" value="folder" checked />
-                @this.texts.GetText("QRGenerator_GenerateFolder")
-            </label>
-            <label class="col-lg-12 col-form-label">
-                <input type="radio" name="generate-type" value="file" />
-                @this.texts.GetText("QRGenerator_GenerateFile")
-            </label>
-        </div>
-    </div>
     <div class="col-lg-9 my-auto">
         <button id="btn-select-file" class="btn">
             <img src="~/images/logo-drive.png" class="img-inline" />
-            @this.texts.GetText("QRGenerator_GeneratePicker")
+            @this.texts.GetText("GifMaker_GeneratePicker")
         </button>
-        <span><span>@this.texts.GetText("QRGenerator_Selected")</span><span id="lbl-selected-filename">@this.texts.GetText("QRGenerator_None")</span></span>
+        <span><span>@this.texts.GetText("GifMaker_Selected")</span><span id="lbl-selected-filename">@this.texts.GetText("GifMaker_None")</span></span>
+    </div>
+</div>
+
+<hr />
+
+<div class="form-group row">
+    <div class="col-lg-12">
+        <video id="video" controls class="d-none"></video>
+    </div>
+</div>
+
+<div class="form-group row d-none" id="controls">
+    <label class="col-lg-1 col-form-label">
+        Start time:
+    </label>
+    <div class="col-lg-3">
+        <input id="start-time" value="0" />
+    </div>
+    <br />
+    <label class="col-lg-1 col-form-label">
+        End time:
+    </label>
+    <div class="col-lg-3">
+        <input id="end-time" value="0" />
+    </div>
+</div>
+
+<div class="form-group row" id="controls">
+    <div class="col-lg-4">
+        <div id="slider-range"></div>
     </div>
 </div>
 
@@ -81,7 +84,7 @@
     <div id="pnl-actions" class="col-lg-9">
         <div>
             <button id="btn-save-to-drive" class="btn btn-primary m-r-5">
-                @this.texts.GetText("QRGenerator_Generate")
+                @this.texts.GetText("GifMaker_Generate")
             </button>
 
             <div id="btn-drive-button"></div>
@@ -129,8 +132,10 @@
 </div>
 
 @section Scripts {
+    <script defer src="~/lib/jquery-ui/jquery-ui.min.js"></script>
     <script defer src="~/lib/gifshot/gifshot.js"></script>
     <script defer src="https://apis.google.com/js/platform.js"></script>
+    <script defer src="~/js/site.js" asp-append-version="true"></script>
     <script defer src="~/js/drive.js" asp-append-version="true"></script>
     <script defer src="https://apis.google.com/js/api.js?onload=onGoogleApiLoaded"></script>
 }

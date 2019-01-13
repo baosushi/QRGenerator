@@ -24,36 +24,6 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "MultiEmailPdf", "MultiEmail
 		SlnRelativePath = "MultiEmailPdf\"
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pdf", "Pdf", "{35238496-E6C2-4663-9038-6EED1BE80879}"
-	ProjectSection(SolutionItems) = preProject
-		Pdf\info.txt = Pdf\info.txt
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSuiteChromeExtension.Pdf.Api", "Pdf\GSuiteChromeExtension.Pdf.Api\GSuiteChromeExtension.Pdf.Api.csproj", "{5CEDCDFD-ACF1-41D6-8B76-69FD3E6B59C7}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GSuiteChromeExtension.Pdf.Web", "Pdf\GSuiteChromeExtension.Pdf.Web\GSuiteChromeExtension.Pdf.Web.csproj", "{20BB19FC-78F2-4741-BA3F-9134EF582344}"
-EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "GSuiteChromeExtension.Pdf.Chrome", "Pdf\GSuiteChromeExtension.Pdf.Chrome\", "{55FCE2B8-881B-4925-BF98-A567C1D7025B}"
-	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_55554"
-		Debug.AspNetCompiler.PhysicalPath = "Pdf\GSuiteChromeExtension.Pdf.Chrome\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_55554\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_55554"
-		Release.AspNetCompiler.PhysicalPath = "Pdf\GSuiteChromeExtension.Pdf.Chrome\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_55554\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "55554"
-		SlnRelativePath = "Pdf\GSuiteChromeExtension.Pdf.Chrome\"
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Zip", "Zip", "{77654CC2-C5B2-4BA9-9703-9B8018D11759}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GSuiteChromeExtension.Zip.Api", "Zip\GSuiteChromeExtension.Zip.Api\GSuiteChromeExtension.Zip.Api.csproj", "{F89538F8-4A00-43C6-A7F0-04BF4D306C47}"
@@ -66,11 +36,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GSuiteChromeExtension.Test"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GSuiteChromeExtension.DemoTest", "GSuiteChromeExtension.DemoTest\GSuiteChromeExtension.DemoTest.csproj", "{5D2ECA6E-D521-43FC-A478-B77319445D51}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assets", "Assets", "{BCD1CA76-414F-4796-9910-27C3D05D0264}"
-	ProjectSection(SolutionItems) = preProject
-		Pdf\Assets\info.txt = Pdf\Assets\info.txt
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assets", "Assets", "{CB19702D-DB6C-4442-BFB3-DD6F0B3B43F5}"
 	ProjectSection(SolutionItems) = preProject
 		Zip\Assets\info.txt = Zip\Assets\info.txt
@@ -82,7 +47,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GSuiteChromeExtension.QRGen
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GifMaker", "GifMaker", "{A3788BF8-D74D-4594-B894-06CF29DD43DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSuiteChromeExtension.GifMaker.Web", "GSuiteChromeExtension.GifMaker.Web\GSuiteChromeExtension.GifMaker.Web.csproj", "{6861AC2D-1FA2-4683-BB6A-5AE6232F3EF1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GSuiteChromeExtension.GifMaker.Web", "GSuiteChromeExtension.GifMaker.Web\GSuiteChromeExtension.GifMaker.Web.csproj", "{6861AC2D-1FA2-4683-BB6A-5AE6232F3EF1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,18 +58,6 @@ Global
 		{D0D0AA14-F921-4544-A851-49E3F93EF99A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D0D0AA14-F921-4544-A851-49E3F93EF99A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0D0AA14-F921-4544-A851-49E3F93EF99A}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{5CEDCDFD-ACF1-41D6-8B76-69FD3E6B59C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5CEDCDFD-ACF1-41D6-8B76-69FD3E6B59C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5CEDCDFD-ACF1-41D6-8B76-69FD3E6B59C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5CEDCDFD-ACF1-41D6-8B76-69FD3E6B59C7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{20BB19FC-78F2-4741-BA3F-9134EF582344}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{20BB19FC-78F2-4741-BA3F-9134EF582344}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{20BB19FC-78F2-4741-BA3F-9134EF582344}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{20BB19FC-78F2-4741-BA3F-9134EF582344}.Release|Any CPU.Build.0 = Release|Any CPU
-		{55FCE2B8-881B-4925-BF98-A567C1D7025B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{55FCE2B8-881B-4925-BF98-A567C1D7025B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{55FCE2B8-881B-4925-BF98-A567C1D7025B}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{55FCE2B8-881B-4925-BF98-A567C1D7025B}.Release|Any CPU.Build.0 = Debug|Any CPU
 		{F89538F8-4A00-43C6-A7F0-04BF4D306C47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F89538F8-4A00-43C6-A7F0-04BF4D306C47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F89538F8-4A00-43C6-A7F0-04BF4D306C47}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -138,12 +91,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{5CEDCDFD-ACF1-41D6-8B76-69FD3E6B59C7} = {35238496-E6C2-4663-9038-6EED1BE80879}
-		{20BB19FC-78F2-4741-BA3F-9134EF582344} = {35238496-E6C2-4663-9038-6EED1BE80879}
-		{55FCE2B8-881B-4925-BF98-A567C1D7025B} = {35238496-E6C2-4663-9038-6EED1BE80879}
 		{F89538F8-4A00-43C6-A7F0-04BF4D306C47} = {77654CC2-C5B2-4BA9-9703-9B8018D11759}
 		{5C033505-EC09-4042-9178-670D94B7CED9} = {77654CC2-C5B2-4BA9-9703-9B8018D11759}
-		{BCD1CA76-414F-4796-9910-27C3D05D0264} = {35238496-E6C2-4663-9038-6EED1BE80879}
 		{CB19702D-DB6C-4442-BFB3-DD6F0B3B43F5} = {77654CC2-C5B2-4BA9-9703-9B8018D11759}
 		{DBBF2DA7-1D15-48D4-AEBD-8BBD84ECB0CD} = {BFCECB45-640A-4D66-8A96-E530B7CE31F2}
 		{6861AC2D-1FA2-4683-BB6A-5AE6232F3EF1} = {A3788BF8-D74D-4594-B894-06CF29DD43DC}
