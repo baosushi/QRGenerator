@@ -43,7 +43,7 @@
             <img src="~/images/logo-drive.png" class="img-inline" />
             @this.texts.GetText("GifMaker_GeneratePicker")
         </button>
-        <span><span>@this.texts.GetText("GifMaker_Selected")</span><span id="lbl-selected-filename">@this.texts.GetText("GifMaker_None")</span></span>
+        <span><span>@this.texts.GetText("GifMaker_Selected")</span>@*<span id="lbl-selected-filename">@this.texts.GetText("GifMaker_None")</span>*@</span>
     </div>
 </div>
 
@@ -77,13 +77,11 @@
     </div>
 </div>
 
-<hr />
-
 <div class="row">
     <div class="col-lg-3"></div>
     <div id="pnl-actions" class="col-lg-9">
         <div>
-            <button id="btn-save-to-drive" class="btn btn-primary m-r-5">
+            <button id="btn-generate" class="btn btn-primary m-r-5 d-none">
                 @this.texts.GetText("GifMaker_Generate")
             </button>
 
@@ -92,6 +90,22 @@
         <p id="lbl-working" class="text-warning mt-1 invisible">@this.texts.GetText("File_Processing")</p>
     </div>
 
+</div>
+
+<div class="row">
+    <div class="col-lg-12" id="result-container">
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-9">
+        <button id="btn-download" class="btn btn-primary m-r-5 d-none">
+            @this.texts.GetText("GifMaker_Download")
+        </button>
+
+        <div id="btn-drive-button"></div>
+    </div>
 </div>
 
 <hr />

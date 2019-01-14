@@ -39,38 +39,7 @@ namespace GSuiteChromeExtension.GifMaker.Web.Controllers
             ms.Seek(0, SeekOrigin.Begin);
             var item = ms.ToArray();
 
-            //try
-            //{
-            //    byte[] imageData = null;
-            //    MemoryStream ms = null;
-
-            //    try
-            //    {
-            //        using (var wc = new WebClient())
-            //        {
-            //            imageData = wc.DownloadData($"https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl={item.WebViewLink}");
-            //        }
-            //        ms = new MemoryStream(imageData);
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        //forbidden, proxy issues, file not found (404) etc
-            //    }
-            //}
-            //catch (Exception e)
-            //{
-            //    return this.StatusCode(500, e.Message);
-            //}
-
-            //var path = Path.Combine(env.WebRootPath, "Upload");
-            //Directory.CreateDirectory(path);
-
-            return File(item, "video/mp4");
-
-            //return this.Ok(new
-            //{
-            //    Path = "/Upload/" + Uri.EscapeDataString($"{request.File.Id}.docx"),
-            //});
+            return File(item, "video/mp4", true);
         }
 
         private async Task<byte[]> GetGoogleApiResponse<T>(string url, string token)

@@ -281,6 +281,12 @@ var utils = {
 
         return fontSize + 'px';
     },
+    setDefaultVideoDimensions: function setDefaultVideoStreamDimension(width, height) {
+        videoStream.defaultVideoDimensions = {
+            width: width,
+            height: height
+        };
+    },
     webWorkerError: false
 };
 
