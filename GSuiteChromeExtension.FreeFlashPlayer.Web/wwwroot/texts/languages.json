@@ -1,0 +1,47 @@
+﻿[
+    {
+        "Code": "en",
+        "Name": "English",
+        "EnglishName": "English"
+    },
+    {
+        "Code": "sv",
+        "Name": "Svenska",
+        "EnglishName": "Swedish"
+    },
+    {
+        "Code": "no",
+        "Name": "Norsk",
+        "EnglishName": "Norwegian"
+    },
+    {
+        "Code": "nl",
+        "Name": "Nederlands",
+        "EnglishName": "Dutch"
+    },
+    {
+        "Code": "fr",
+        "Name": "français",
+        "EnglishName": "French"
+    },
+    {
+        "Code": "fi",
+        "Name": "suomi",
+        "EnglishName": "Finnish"
+    },
+    {
+        "Code": "de",
+        "Name": "Deutsch",
+        "EnglishName": "German"
+    },
+    {
+        "Code": "da",
+        "Name": "dansk",
+        "EnglishName": "Danish"
+    },
+    {
+        "Code": "ja",
+        "Name": "日本語",
+        "EnglishName": "Japanese"
+    }
+]
