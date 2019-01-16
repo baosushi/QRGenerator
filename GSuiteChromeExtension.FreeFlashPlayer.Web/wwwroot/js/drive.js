@@ -10,14 +10,14 @@ function onPickerApiLoad() {
     checkAvailable();
 }
 
-function onSelectFileButtonClick(callback) {
+function onSelectFileButtonClick() {
     var clientId = $("#loader").attr("data-client-id");
     var scope = "https://www.googleapis.com/auth/drive.file";
 
     gapi.auth2.authorize({
         client_id: clientId,
         scope: scope
-    }, callback || handleAuthResult);
+    }, handleAuthResult);
 }
 
 function handleAuthResult(authResult) {

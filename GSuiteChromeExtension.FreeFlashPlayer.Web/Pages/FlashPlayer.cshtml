@@ -3,7 +3,7 @@
 @inject WebSettings webSettings;
 
 @{
-    var title = this.texts.GetText("GifMaker_Title");
+    var title = this.texts.GetText("FreeFlashPlayer_Title");
     this.ViewBag.Title = title;
 }
 
@@ -20,7 +20,7 @@
      class="d-none"></div>
 
 <h2>@(title)</h2>
-<p>@this.texts.GetText("GifMaker_Description")</p>
+<p>@this.texts.GetText("FreeFlashPlayer_Description")</p>
 
 <hr />
 
@@ -41,25 +41,26 @@
     <div class="col-lg-9 my-auto">
         <button id="btn-select-file" class="btn">
             <img src="~/images/logo-drive.png" class="img-inline" />
-            @this.texts.GetText("GifMaker_GeneratePicker")
+            @this.texts.GetText("FreeFlashPlayer_GeneratePicker")
         </button>
-        <span><span>@this.texts.GetText("GifMaker_Selected")</span>@*<span id="lbl-selected-filename">@this.texts.GetText("GifMaker_None")</span>*@</span>
+        <span><span>@this.texts.GetText("FreeFlashPlayer_Selected")</span>@*<span id="lbl-selected-filename">@this.texts.GetText("FreeFlashPlayer_None")</span>*@</span>
     </div>
 </div>
 
 <hr />
 
-<object width="600" height="400">
-    <param name="movie" value="http://www.yourlinkhere.com/gamename.swf" />
-    <embed src="http://www.yourlinkhere.com/gamename.swf" width="600" height="400">
-    </embed>
-</object>
+<div class="d-none" id="flash-container">
+    <object src="" width="600" height="400">
+        <param name="src" value="" />
+        <embed src="" width="600" height="400" />
+    </object>
+</div>
 
 <div class="row">
     <div class="col-lg-3"></div>
     <div class="col-lg-9">
         <button id="btn-download" class="btn btn-primary m-r-5 d-none">
-            @this.texts.GetText("GifMaker_Download")
+            @this.texts.GetText("FreeFlashPlayer_Download")
         </button>
 
         <div id="btn-drive-button"></div>
@@ -104,8 +105,6 @@
 </div>
 
 @section Scripts {
-    <script defer src="~/lib/jquery-ui/jquery-ui.min.js"></script>
-    <script defer src="~/lib/gifshot/gifshot.js"></script>
     <script defer src="https://apis.google.com/js/platform.js"></script>
     <script defer src="~/js/site.js" asp-append-version="true"></script>
     <script defer src="~/js/drive.js" asp-append-version="true"></script>

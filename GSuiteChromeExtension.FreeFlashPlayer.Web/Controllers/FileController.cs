@@ -39,7 +39,7 @@ namespace GSuiteChromeExtension.FreeFlashPlayer.Web.Controllers
             ms.Seek(0, SeekOrigin.Begin);
             var item = ms.ToArray();
 
-            return File(item, "video/mp4", true);
+            return File(item, "application/x-shockwave-flash");
         }
 
         private async Task<byte[]> GetGoogleApiResponse<T>(string url, string token)
