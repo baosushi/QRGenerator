@@ -1,4 +1,50 @@
-﻿var loopControl = $("#loop");
+﻿var SCOPES = 'https://www.googleapis.com/auth/drive.file';
+var CLIENT_ID = $("#loader").attr("data-client-id");
+var DISCOVERY_DOCS = ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'];
+
+window.loginService = new LoginService(CLIENT_ID, SCOPES, DISCOVERY_DOCS);
+window.driveService = new DriveService();
+
+function initClient() {
+    window.loginService.initClient(updateSigninStatus);
+    //checkDriveParams();
+}
+
+function onGoogleApiLoaded() {
+    gapi.load('client:auth2', initClient);
+}
+
+function updateSigninStatus(isSignedIn) {
+    if (isSignedIn) {
+        //var useremail = window.loginService.userProfile().getEmail();
+        //is_auth(useremail);
+        checkDriveParams();
+    } else {
+        not_auth();
+    }
+}
+
+function checkDriveParams() {
+    var stateJson = getParameterByName("state");
+
+    if (stateJson) {
+        var state = JSON.parse(stateJson);
+        oauthToken = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token;
+
+        if (driveFileInfo) {
+            driveFileInfo = { docs: [{}] };
+        }
+
+        driveFileInfo.docs[0] = {
+            id: state.ids[0],
+            name: "dummy.mp4"
+        };
+
+        getUserSelectedFile();
+    }
+}
+
+var loopControl = $("#loop");
 var startTime = 0;
 var endTime = 0;
 
@@ -120,29 +166,4 @@ $("#btn-download").click(function () {
         .appendTo("body");
     a[0].click();
     a.remove();
-});
-
-$(document).ready(function () {
-    var stateJson = getParameterByName("state");
-
-    if (stateJson) {
-        var state = JSON.parse(stateJson);
-
-        onSelectFileButtonClick(function (authResult) {
-            if (authResult && !authResult.error) {
-                oauthToken = authResult.access_token;
-
-                if (driveFileInfo) {
-                    driveFileInfo = { docs: [{}] };
-                }
-
-                driveFileInfo.docs[0] = {
-                    id: state.ids[0],
-                    name: "dummy.mp4"
-                };
-
-                getUserSelectedFile();
-            }
-        });
-    }
 });
