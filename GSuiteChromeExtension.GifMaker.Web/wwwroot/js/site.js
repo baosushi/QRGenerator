@@ -1,17 +1,32 @@
 ﻿var SCOPES = 'https://www.googleapis.com/auth/drive.file';
 var CLIENT_ID = $("#loader").attr("data-client-id");
 var DISCOVERY_DOCS = ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'];
+var authLoaded = false, pickerLoaded = false;
 
 window.loginService = new LoginService(CLIENT_ID, SCOPES, DISCOVERY_DOCS);
 window.driveService = new DriveService();
 
-function initClient() {
+function onAuthApiLoad() {
     window.loginService.initClient(updateSigninStatus);
+    authLoaded = true;
+    checkAvailable();
     //checkDriveParams();
 }
 
+function onPickerApiLoad() {
+    pickerLoaded = true;
+    checkAvailable();
+}
+
 function onGoogleApiLoaded() {
-    gapi.load('client:auth2', initClient);
+    gapi.load('client:auth2', onAuthApiLoad);
+    gapi.load('picker', onPickerApiLoad);
+}
+
+function checkAvailable() {
+    if (authLoaded && pickerLoaded) {
+        $("#btn-select-file").removeAttr("disabled");
+    }
 }
 
 function updateSigninStatus(isSignedIn) {
@@ -20,7 +35,7 @@ function updateSigninStatus(isSignedIn) {
         //is_auth(useremail);
         checkDriveParams();
     } else {
-        not_auth();
+        loginService.signIn();
     }
 }
 
@@ -42,6 +57,87 @@ function checkDriveParams() {
 
         getUserSelectedFile();
     }
+}
+
+function onSelectFileButtonClick(callback) {
+    //gapi.client.drive.files.get({
+    //    fileId: file.id
+    //}).then(function (resp) {
+    //    debugger
+    //    var retFile = { name: file.name, id: file.id, content: resp.body, parents: file.parents };
+    //    done(retFile);
+    //}, function (reason) {
+    //    console.log('loadFileRaw ERROR: ', reason);
+    //});
+
+    oauthToken = loginService.getAccessToken();
+
+    if (!oauthToken) {
+        loginService.signIn();
+        oauthToken = loginService.getAccessToken();
+    }
+
+    createPicker();
+}
+
+function handleAuthResult(authResult) {
+    if (authResult && !authResult.error) {
+        oauthToken = authResult.access_token;
+        createPicker();
+    }
+}
+
+function createPicker() {
+    var developerKey = $("[data-developer-key]").attr("data-developer-key");
+    var appId = $("[data-app-id]").attr("data-app-id");
+
+    var docsView = new google.picker.DocsView()
+        .setIncludeFolders(false)
+        .setSelectFolderEnabled(false);
+
+    var picker = new google.picker.PickerBuilder()
+        .addView(docsView)
+        .enableFeature(google.picker.Feature.NAV_HIDDEN)
+        .setAppId(appId)
+        .hideTitleBar()
+        .setOAuthToken(oauthToken)
+        .setCallback(pickerCallback)
+        .build();
+
+    picker.setVisible(true);
+}
+
+function onSaveButtonClick() {
+    $.ajax({
+        url: "/api/generator/generate",
+        method: "POST",
+        contentType: "application/json",
+        data: JSON.stringify({
+            Token: oauthToken,
+            File: driveFileInfo.docs[0],
+            IsFolder: driveFileInfo.docs[0].type === "folder",
+            WithDescription: $("#with-description").is(":checked"),
+            Repetition: $("#repetition").val()
+        })
+    }).done(response => {
+        var filename = driveFileInfo.docs[0].id + ".docx";
+
+        gapi.savetodrive.render("btn-drive-button", {
+            src: response.path,
+            filename: filename,
+            sitename: 'QRGenerator'
+        });
+    });
+}
+
+function pickerCallback(info) {
+    if (info.action !== "picked" || !info.docs || !info.docs.length) {
+        return;
+    }
+
+    driveFileInfo = info;
+
+    getUserSelectedFile();
 }
 
 var loopControl = $("#loop");
@@ -166,4 +262,9 @@ $("#btn-download").click(function () {
         .appendTo("body");
     a[0].click();
     a.remove();
+});
+
+$(function () {
+    $("#btn-select-file").click(onSelectFileButtonClick);
+    $("#btn-save-to-drive").click(onSaveButtonClick);
 });

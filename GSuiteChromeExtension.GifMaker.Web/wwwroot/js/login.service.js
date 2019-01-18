@@ -28,4 +28,9 @@
     this.userProfile = function () {
         return gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile();
     };
+
+    //return current access token
+    this.getAccessToken = function () {
+        return gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token;
+    };
 }
