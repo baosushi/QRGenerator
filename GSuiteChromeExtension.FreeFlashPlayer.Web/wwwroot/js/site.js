@@ -1,4 +1,77 @@
-﻿var loopControl = $("#loop");
+﻿var SCOPES = 'https://www.googleapis.com/auth/drive.file';
+var CLIENT_ID = $("#loader").attr("data-client-id");
+var DISCOVERY_DOCS = ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'];
+var authLoaded = false, pickerLoaded = false;
+
+window.loginService = new LoginService(CLIENT_ID, SCOPES, DISCOVERY_DOCS);
+window.driveService = new DriveService();
+
+function onAuthApiLoad() {
+    window.loginService.initClient(updateSigninStatus);
+    authLoaded = true;
+    checkAvailable();
+    //checkDriveParams();
+}
+
+function onPickerApiLoad() {
+    pickerLoaded = true;
+    checkAvailable();
+}
+
+function onGoogleApiLoaded() {
+    gapi.load('client:auth2', onAuthApiLoad);
+    gapi.load('picker', onPickerApiLoad);
+}
+
+function checkAvailable() {
+    if (authLoaded && pickerLoaded) {
+        $("#btn-select-file").removeAttr("disabled");
+    }
+}
+
+function updateSigninStatus(isSignedIn) {
+    if (isSignedIn) {
+        checkDriveParams();
+    } else {
+        loginService.signIn();
+    }
+}
+
+function checkDriveParams() {
+    var stateJson = getParameterByName("state");
+
+    if (stateJson) {
+        var state = JSON.parse(stateJson);
+        oauthToken = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token;
+
+        if (driveFileInfo) {
+            driveFileInfo = { docs: [{}] };
+        }
+
+        driveFileInfo.docs[0] = {
+            id: state.ids[0],
+            name: "dummy.mp4"
+        };
+
+        getUserSelectedFile();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var loopControl = $("#loop");
 var startTime = 0;
 var endTime = 0;
 
