@@ -73,16 +73,11 @@ function onSelectFileButtonClick(callback) {
     oauthToken = loginService.getAccessToken();
 
     if (!oauthToken) {
-        loginService.signIn();
-        oauthToken = loginService.getAccessToken();
-    }
-
-    createPicker();
-}
-
-function handleAuthResult(authResult) {
-    if (authResult && !authResult.error) {
-        oauthToken = authResult.access_token;
+        loginService.signIn().then(function () {
+            oauthToken = loginService.getAccessToken();
+            createPicker();
+        });
+    } else {
         createPicker();
     }
 }
