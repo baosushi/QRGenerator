@@ -23,7 +23,7 @@ namespace GSuiteChromeExtension.FreeFlashPlayer.Web.Controllers
         }
 
         [HttpGet, Route("getFile")]
-        public async Task<IActionResult> GetFile(string Token, string Id, string Name)
+        public async Task<IActionResult> GetFile(string Token, string Id)
         {
             var url = $"https://www.googleapis.com/drive/v3/files/{Id}?alt=media";
             //var item = await GetGoogleApiResponse<Stream>(url, Token);

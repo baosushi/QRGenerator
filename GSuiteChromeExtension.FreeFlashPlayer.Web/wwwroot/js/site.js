@@ -42,22 +42,31 @@ function checkDriveParams() {
 
     if (stateJson) {
         var state = JSON.parse(stateJson);
-        oauthToken = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token;
+        oauthToken = loginService.getAccessToken();
 
         if (driveFileInfo) {
             driveFileInfo = { docs: [{}] };
         }
 
-        driveFileInfo.docs[0] = {
-            id: state.ids[0],
-            name: "dummy.mp4"
-        };
+        if (!oauthToken) {
+            loginService.signIn().then(function () {
+                oauthToken = loginService.getAccessToken();
 
-        getUserSelectedFile();
+                driveFileInfo.docs[0] = {
+                    id: state.ids[0]
+                };
+
+                getUserSelectedFile();
+            });
+        } else {
+            driveFileInfo.docs[0] = {
+                id: state.ids[0]
+            };
+
+            getUserSelectedFile();
+        }
     }
 }
-
-
 
 
 
@@ -81,7 +90,7 @@ function getUserSelectedFile() {
     var flashContainer = $("#flash-container");
     flashContainer.html("");
 
-    var embed = $("<embed type=\"application/x-shockwave-flash\" src=\"" + "api/file/getFile?Token=" + oauthToken + "&Id=" + firstFile.id + "&Name=" + firstFile.name + "\" />");
+    var embed = $("<embed type=\"application/x-shockwave-flash\" src=\"" + "api/file/getFile?Token=" + oauthToken + "&Id=" + firstFile.id + "\" />");
     flashContainer.append(embed);
 
     if (flashContainer.hasClass("d-none")) {
@@ -99,48 +108,58 @@ function getParameterByName(name) {
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
-$('#btn-generate').click(function () {
-    var video = $("#video")[0];
-    $("#result-container").html("");
-    $("#result-container").append('<img src="/images/loading.gif" style="display: block; width: auto; margin: auto;" />');
-    if (!$("#btn-download").hasClass("d-none")) {
-        $("#btn-download").addClass("d-none");
-    }
-    if (!$("#btn-generate").hasClass("d-none")) {
-        $("#btn-generate").addClass("d-none");
-    }
-    gifshot.createGIF({
-        gifWidth: video.videoWidth,
-        gifHeight: video.videoHeight,
-        video: [
-            $("#video")[0].src
-        ],
-        interval: 0.1,
-        offset: startTime,
-        numFrames: Math.ceil(endTime - startTime) / 0.1,
-        frameDuration: 1
-    }, function (obj) {
-        if (!obj.error) {
-            var image = obj.image,
-                animatedImage = document.createElement('img');
-            animatedImage.src = image;
-            animatedImage.id = "result";
-            $("#result-container").html("");
-            $("#result-container").append(animatedImage);
-            $("#btn-download").removeClass("d-none");
-            $("#btn-generate").removeClass("d-none");
-        }
-    });
-});
+//$("#btn-download").click(function () {
+//    var a = $("<a>")
+//        .attr("href", $("img#result")[0].src)
+//        .attr("download", "generated-gif.gif")
+//        .appendTo("body");
+//    a[0].click();
+//    a.remove();
+//});
 
-$("#btn-download").click(function () {
-    var a = $("<a>")
-        .attr("href", $("img#result")[0].src)
-        .attr("download", "generated-gif.gif")
-        .appendTo("body");
-    a[0].click();
-    a.remove();
-});
+function createPicker() {
+    var developerKey = $("[data-developer-key]").attr("data-developer-key");
+    var appId = $("[data-app-id]").attr("data-app-id");
+
+    var docsView = new google.picker.DocsView()
+        .setIncludeFolders(false)
+        .setSelectFolderEnabled(false)
+        .setQuery("*.swf");
+
+    var picker = new google.picker.PickerBuilder()
+        .addView(docsView)
+        .enableFeature(google.picker.Feature.NAV_HIDDEN)
+        .setAppId(appId)
+        .hideTitleBar()
+        .setOAuthToken(oauthToken)
+        .setCallback(pickerCallback)
+        .build();
+
+    picker.setVisible(true);
+}
+
+function pickerCallback(info) {
+    if (info.action !== "picked" || !info.docs || !info.docs.length) {
+        return;
+    }
+
+    driveFileInfo = info;
+
+    getUserSelectedFile();
+}
+
+function onSelectFileButtonClick(callback) {
+    oauthToken = loginService.getAccessToken();
+
+    if (!oauthToken) {
+        loginService.signIn().then(function () {
+            oauthToken = loginService.getAccessToken();
+            createPicker();
+        });
+    } else {
+        createPicker();
+    }
+}
 
 $(document).ready(function () {
     var stateJson = getParameterByName("state");
@@ -157,12 +176,16 @@ $(document).ready(function () {
                 }
 
                 driveFileInfo.docs[0] = {
-                    id: state.ids[0],
-                    name: "dummy.mp4"
+                    id: state.ids[0]
                 };
 
                 getUserSelectedFile();
             }
         });
     }
+});
+
+$(function () {
+    $("#btn-select-file").click(onSelectFileButtonClick);
+    $("#btn-save-to-drive").click(onSaveButtonClick);
 });

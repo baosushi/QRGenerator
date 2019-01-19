@@ -44,18 +44,31 @@ function checkDriveParams() {
 
     if (stateJson) {
         var state = JSON.parse(stateJson);
-        oauthToken = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token;
+        oauthToken = loginService.getAccessToken();
 
         if (driveFileInfo) {
             driveFileInfo = { docs: [{}] };
         }
 
-        driveFileInfo.docs[0] = {
-            id: state.ids[0],
-            name: "dummy.mp4"
-        };
+        if (!oauthToken) {
+            loginService.signIn().then(function () {
+                oauthToken = loginService.getAccessToken();
 
-        getUserSelectedFile();
+                driveFileInfo.docs[0] = {
+                    id: state.ids[0],
+                    name: "dummy.mp4"
+                };
+
+                getUserSelectedFile();
+            });
+        } else {
+            driveFileInfo.docs[0] = {
+                id: state.ids[0],
+                name: "dummy.mp4"
+            };
+
+            getUserSelectedFile();
+        }
     }
 }
 
