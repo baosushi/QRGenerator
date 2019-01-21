@@ -187,5 +187,4 @@ $(document).ready(function () {
 
 $(function () {
     $("#btn-select-file").click(onSelectFileButtonClick);
-    $("#btn-save-to-drive").click(onSaveButtonClick);
 });
