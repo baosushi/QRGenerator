@@ -8915,6 +8915,7 @@
                 key: "render",
                 value: function () {
                     var e = this.props.isFullPageView ? " full_page_view" : "";
+                    debugger
                     return u.a.createElement("div", {
                         className: "djvu_js_viewer" + e
                     }, this.props.isFileLoading ? u.a.createElement(y.a, null) : this.props.isFileLoaded ? u.a.createElement(u.a.Fragment, null, u.a.createElement("div", {

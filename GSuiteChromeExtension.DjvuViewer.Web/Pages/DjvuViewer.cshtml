@@ -12,6 +12,11 @@
     <link async href="~/lib/jquery-ui/jquery-ui.structure.min.css" rel="stylesheet" />
     <link async href="~/lib/jquery-ui/jquery-ui.theme.min.css" rel="stylesheet" />
     <link async href="~/lib/djvu/css/djvu_viewer.css" rel="stylesheet" />
+    <style>
+        .djvu_js_viewer .toolbar, .djvu_js_viewer .toolbar .scale_gizmo {
+            box-sizing: content-box;
+        }
+    </style>
 }
 
 <div id="loader"
@@ -111,8 +116,8 @@
 
     <script>
         window.onload = function () {
-            var ViewerInstance = new DjVu.Viewer();
-            ViewerInstance.render(document.querySelector("#for_viewer"));
+            window.ViewerInstance = new DjVu.Viewer();
+            window.ViewerInstance.render(document.querySelector("#for_viewer"));
         }
     </script>
 }

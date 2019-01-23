@@ -87,15 +87,9 @@ var endTime = 0;
 function getUserSelectedFile() {
     var firstFile = driveFileInfo.docs[0];
 
-    var flashContainer = $("#flash-container");
-    flashContainer.html("");
-
-    var embed = $("<embed type=\"application/x-shockwave-flash\" src=\"" + "api/file/getFile?Token=" + oauthToken + "&Id=" + firstFile.id + "\" />");
-    flashContainer.append(embed);
-
-    if (flashContainer.hasClass("d-none")) {
-        flashContainer.removeClass("d-none");
-    }
+    var url = `api/file/getFile?Token=${oauthToken}&Id=${firstFile.id}`;
+    var promise = window.ViewerInstance.loadDocumentByUrl(url);
+    Promise.resolve(promise);
 }
 
 function getParameterByName(name) {
