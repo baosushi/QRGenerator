@@ -55,7 +55,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GSuiteChromeExtension.FreeF
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DjvuViewer", "DjvuViewer", "{36D5CB22-AB04-4794-A2F0-F63D4D8D0817}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSuiteChromeExtension.DjvuViewer.Web", "GSuiteChromeExtension.DjvuViewer.Web\GSuiteChromeExtension.DjvuViewer.Web.csproj", "{8DDCC05C-1094-4D78-8A38-8524703FFD4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GSuiteChromeExtension.DjvuViewer.Web", "GSuiteChromeExtension.DjvuViewer.Web\GSuiteChromeExtension.DjvuViewer.Web.csproj", "{8DDCC05C-1094-4D78-8A38-8524703FFD4C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GanttChart", "GanttChart", "{BA92A0E6-FCB7-4BA6-8ED5-1EEDF4ACFB7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSuiteChromeExtension.GanttChart.Web", "GSuiteChromeExtension.GanttChart.Web\GSuiteChromeExtension.GanttChart.Web.csproj", "{6B93D72B-D482-4BDF-8B17-1DEC344520A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -102,6 +106,10 @@ Global
 		{8DDCC05C-1094-4D78-8A38-8524703FFD4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8DDCC05C-1094-4D78-8A38-8524703FFD4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8DDCC05C-1094-4D78-8A38-8524703FFD4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B93D72B-D482-4BDF-8B17-1DEC344520A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B93D72B-D482-4BDF-8B17-1DEC344520A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B93D72B-D482-4BDF-8B17-1DEC344520A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B93D72B-D482-4BDF-8B17-1DEC344520A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -114,6 +122,7 @@ Global
 		{6861AC2D-1FA2-4683-BB6A-5AE6232F3EF1} = {A3788BF8-D74D-4594-B894-06CF29DD43DC}
 		{E9006ABF-3D9D-4679-9994-A2BC930BFA69} = {DB2252D2-68E7-4471-9CCA-351EB385AEFE}
 		{8DDCC05C-1094-4D78-8A38-8524703FFD4C} = {36D5CB22-AB04-4794-A2F0-F63D4D8D0817}
+		{6B93D72B-D482-4BDF-8B17-1DEC344520A1} = {BA92A0E6-FCB7-4BA6-8ED5-1EEDF4ACFB7D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {85CF65B1-4AF3-4558-86E0-F6DC6F7C163F}
