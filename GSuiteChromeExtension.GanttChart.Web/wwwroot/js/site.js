@@ -4,6 +4,7 @@ var DISCOVERY_DOCS = ['https://www.googleapis.com/discovery/v1/apis/drive/v3/res
 var authLoaded = false, pickerLoaded = false;
 var ganttChart;
 var selectedTask;
+var isEditTask;
 
 window.loginService = new LoginService(CLIENT_ID, SCOPES, DISCOVERY_DOCS);
 window.driveService = new DriveService();
@@ -184,9 +185,6 @@ $(document).ready(function () {
         vAdditionalHeaders: { // Add data columns to your table
             category: {
                 title: 'Category'
-            },
-            sector: {
-                title: 'Sector'
             }
         },
         vUseSingleCell: 10000, // Set the threshold cell per table row (Helps performance for large data.
@@ -217,41 +215,23 @@ $(document).ready(function () {
         pCaption: "",
         pCost: 1000,
         pNotes: "Some Notes text",
-        category: "Example",
-        sector: "Finance"
+        category: "Example"
     });
 
     ganttChart.Draw();
 
-    function getTaskByName(name) {
-        var task = null;
-        try {
-            ganttChart.vTaskList.forEach(function (v, i) {
-                if (v.getName().toLowerCase() === name.toLowerCase()) {
-                    task = v;
-                }
-            });
-        } catch (e) {
-            console.log(e);
-        }
+    $('[data-dismiss=modal]').on('click', function (e) {
+        var $t = $(this),
+            target = $t[0].href || $t.data("target") || $t.parents('.modal') || [];
 
-        return task;
-    }
-
-    function getTaskByOriginalId(id) {
-        var task = null;
-        try {
-            ganttChart.vTaskList.forEach(function (v, i) {
-                if (v.getID() === id) {
-                    task = v;
-                }
-            });
-        } catch (e) {
-            console.log(e);
-        }
-
-        return task;
-    }
+        $(target)
+            .find("input,textarea,select")
+            .val('')
+            .end()
+            .find("input[type=checkbox], input[type=radio]")
+            .prop("checked", "")
+            .end();
+    });
 });
 
 function enableEditAndDelete() {
@@ -274,7 +254,18 @@ function onRowClick(task) {
     enableEditAndDelete();
 }
 
+function onAddButtonClick() {
+    $("#task-modal-action-btn").text("Add task");
+    $("#task-modal-title").text("Add new task");
+    isEditTask = false;
+    initSelect2();
+}
+
 function onEditButtonClick() {
+    $("#task-modal-action-btn").text("Save changes");
+    $("#task-modal-title").text("Edit task");
+    isEditTask = true;
+    initSelect2();
 
 }
 
@@ -304,6 +295,137 @@ function onDeleteButtonClick() {
     });
 }
 
+//function validateModal() {
+//    var result = true;
+//    $.each($("#task-modal").find(":input").filter("[required]"), function (i, v) {
+//        if (!v.value) {
+//            result = false;
+//            return;
+//        }
+//    });
+
+//    return result;
+//}
+
+function modalAction(e) {
+    e.preventDefault();
+
+    var modal = $("#task-modal");
+
+    var taskName = modal.find("input[name='task-name']").val();
+    var taskType = modal.find("select[name='task-type']").val();
+    var startDate = modal.find("input[name='task-start']").val();
+    var endDate = modal.find("input[name='task-end']").val();
+    var resourceName = modal.find("input[name='task-resource-name']").val();
+    var dependency = modal.find("select[name='task-dependency']").val();
+    var category = modal.find("input[name='task-category']").val();
+    var note = modal.find("input[name='task-note']").val();
+    var cost = modal.find("input[name='task-cost']").val();
+    var completion = modal.find("input[name='task-completion']").val();
+    var isMilestone = modal.find("input[name='task-milestone']")[0].checked;
+    var parent = modal.find("select[name='task-parent']").val() || 0;
+
+    if (isEditTask) {
+        selectedTask.setName(taskName);
+        selectedTask.setGroup(taskType);
+        selectedTask.setStart(startDate);
+        selectedTask.setEnd(endDate);
+        selectedTask.setResource(resourceName);
+        selectedTask.setDepend(dependency);
+        selectedTask.getDataObject().category = category;
+        selectedTask.getNotes().textContent = note;
+        selectedTask.setCost(cost);
+        selectedTask.setCompVal(completion);
+    } else {
+        var pClass = taskType === 1 ? "ggroupblack" : "gtaskblue";
+        ganttChart.AddTaskItemObject({
+            pID: 1,
+            pName: taskName,
+            pStart: startDate,
+            pEnd: endDate,
+            //pPlanStart: "2017-04-01",
+            //pPlanEnd: "2017-04-15 12:00",
+            pClass: pClass,
+            //pLink: "",
+            pMile: isMilestone ? 1 : 0,
+            pRes: resourceName,
+            pComp: completion,
+            pGroup: taskType,
+            pParent: parent,
+            pOpen: 1,
+            pDepend: dependency,
+            pCaption: "",
+            pCost: cost,
+            pNotes: note,
+            category: category
+        });
+    }
+
+    ganttChart.Draw();
+
+    $("#task-modal").find("button[type='reset']").trigger("click");
+}
+
+function initSelect2() {
+    var dataSource = getSelect2TaskList();
+
+    $("select[name='task-dependency']").select2({
+        data: dataSource,
+        multiple: true,
+        width: "100%",
+        containerCssClass: "form-control-border"
+    });
+
+    $("select[name='task-parent']").select2({
+        data: dataSource,
+        multiple: false,
+        width: "100%",
+        containerCssClass: "form-control-border"
+    });
+}
+
 function setSelectedTaskLabel(name) {
     $("#select-task-label").text(name);
+}
+
+function getTaskByName(name) {
+    var task = null;
+    try {
+        ganttChart.vTaskList.forEach(function (v, i) {
+            if (v.getName().toLowerCase() === name.toLowerCase()) {
+                task = v;
+            }
+        });
+    } catch (e) {
+        console.log(e);
+    }
+
+    return task;
+}
+
+function getTaskByOriginalId(id) {
+    var task = null;
+    try {
+        ganttChart.vTaskList.forEach(function (v, i) {
+            if (v.getID() === id) {
+                task = v;
+            }
+        });
+    } catch (e) {
+        console.log(e);
+    }
+
+    return task;
+}
+
+function getSelect2TaskList() {
+    var result = [];
+    ganttChart.vTaskList.forEach(function (v, i) {
+        result.push({
+            id: v.getID(),
+            text: v.getName()
+        });
+    });
+
+    return result;
 }
