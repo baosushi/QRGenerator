@@ -262,4 +262,5 @@ __pycache__/
 /Zip/GSuiteChromeExtension.Zip.Api/Uploads
 /Pdf/GSuiteChromeExtension.Pdf.Api/Upload
 /GSuiteChromeExtension.DemoTest/wwwroot/Upload
+/GSuiteChromeExtension.GanttChart.Web/appsettings.json
 *.pubxml
