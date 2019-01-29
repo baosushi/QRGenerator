@@ -2716,7 +2716,7 @@ exports.TaskItem = function (pID, pName, pStart, pEnd, pClass, pLink, pMile, pRe
         vListChildRow = pRow; };
     this.setGroupSpan = function (pSpan) { if (typeof HTMLSpanElement !== 'function' || pSpan instanceof HTMLSpanElement)
         vGroupSpan = pSpan; };
-    this.setDepend = function (pDepend) { vDepend = pDepend.replace(/,*[0-9]+[FS]F/g, ''); }
+    this.setDepend = function (pDepend) { vDepend = pDepend; };
 };
 exports.createTaskInfo = function (pTask) {
     var vTmpDiv;

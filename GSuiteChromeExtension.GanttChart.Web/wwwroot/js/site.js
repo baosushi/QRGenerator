@@ -267,6 +267,20 @@ function onEditButtonClick() {
     isEditTask = true;
     initSelect2();
 
+    var modal = $("#task-modal");
+
+    modal.find("input[name='task-name']").val(selectedTask.getName());
+    modal.find("select[name='task-type']").val(selectedTask.getGroup());
+    modal.find("input[name='task-start']").val(selectedTask.getStart().toISOString().substr(0, 10));
+    modal.find("input[name='task-end']").val(selectedTask.getEnd().toISOString().substr(0, 10));
+    modal.find("input[name='task-resource-name']").val(selectedTask.getResource());
+    modal.find("select[name='task-dependency']").val(selectedTask.getDepend());
+    modal.find("input[name='task-category']").val(selectedTask.getDataObject().category);
+    modal.find("input[name='task-note']").val(selectedTask.getNotes().textContent);
+    modal.find("input[name='task-cost']").val(selectedTask.getCost());
+    modal.find("input[name='task-completion']").val(selectedTask.getCompVal());
+    modal.find("input[name='task-milestone']")[0].checked = selectedTask.getMile() === 1;
+    modal.find("select[name='task-parent']").val(selectedTask.getParent());
 }
 
 function onDeleteButtonClick() {
@@ -339,7 +353,7 @@ function modalAction(e) {
     } else {
         var pClass = taskType === 1 ? "ggroupblack" : "gtaskblue";
         ganttChart.AddTaskItemObject({
-            pID: 1,
+            pID: getNextId(),
             pName: taskName,
             pStart: startDate,
             pEnd: endDate,
@@ -428,4 +442,19 @@ function getSelect2TaskList() {
     });
 
     return result;
+}
+
+function getNextId() {
+    var id = 0;
+    try {
+        ganttChart.vTaskList.forEach(function (v, i) {
+            if (parseInt(v.getOriginalID()) > id) {
+                id = parseInt(v.getOriginalID());
+            }
+        });
+    } catch (e) {
+        console.log(e);
+    }
+
+    return id + 1;
 }
