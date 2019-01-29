@@ -1,7 +1,7 @@
 {
   "SponsoredLink": "Sponsored Link:",
   "Optional": "(optional)",
-  "Title": "Djvu Viewer",
+  "Title": "Free Online Gantt Chart",
   "Footer_Home": "Home",
   "Footer_PP": "Privacy Policy",
   "Footer_Terms": "Terms of Use",
@@ -17,7 +17,7 @@
   "Dialog_Close": "Close",
   "GanttChart_GeneratePicker": "Browse...",
   "GanttChart_Title": "Free Gantt Chart",
-  "GanttChart_Description": "View DjVu files directly from your Google Drive.",
+  "GanttChart_Description": "Free online Gantt chart with drive integration.",
   "GanttChart_Download": "Download GIF",
   "GanttChart_Generate": "Generate GIF",
   "GanttChart_SaveDrive": "Save to Drive",

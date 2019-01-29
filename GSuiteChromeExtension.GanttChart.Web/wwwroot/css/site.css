@@ -1,9 +1,9 @@
 /* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification 
 for details on configuring this project to bundle and minify static web assets. */
-body {
+/*body {
     padding-top: 50px;
     padding-bottom: 20px;
-}
+}*/
 
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
@@ -34,4 +34,40 @@ body {
     .carousel-caption {
         display: none;
     }
+}
+
+.row {
+    margin: 10px auto;
+}
+
+.modal label {
+    font-weight: bold;
+    color: #555;
+}
+
+.form-control-border {
+    border: 1px solid #ced4da !important;
+}
+
+.gtaskheading, .gmajorheading, .gminorheading, .gminorheadingwkend, .gtaskname div, .gtaskname, .gadditional, .gresource, .gduration, .gpccomplete, .gcost, .gstartdate div, .gplanstartdate, .gplanenddate, .gstartdate, .genddate {
+    font-size: 13px !important;
+    max-width: none !important;
+    width: auto !important;
+}
+
+.gmajorheading, .gminorheading, .gminorheadingwkend, .gtaskcell, .gtaskcellwkend {
+    height: 30px !important;
+    border-bottom: none !important;
+}
+
+.gtaskheading, .gname, .gtaskname, .gresource, .gduration, .gpccomplete, .gstartdate, .gplanstartdate, .gplanenddate, .gcost, .genddate {
+    height: 30px !important;
+}
+
+.gantt td {
+    padding: 2px !important;
+}
+
+.gmajorheading {
+    text-align: -webkit-center !important;
 }

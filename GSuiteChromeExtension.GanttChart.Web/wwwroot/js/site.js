@@ -73,10 +73,51 @@ function checkDriveParams() {
 
 function getUserSelectedFile() {
     var firstFile = driveFileInfo.docs[0];
+    
+    var url = `https://www.googleapis.com/drive/v3/files/${firstFile.id}?alt=media`;
 
-    var url = `api/file/getFile?Token=${oauthToken}&Id=${firstFile.id}`;
-    var promise = window.ViewerInstance.loadDocumentByUrl(url);
-    Promise.resolve(promise);
+    $("#GanttChartDIV").html(`<img src="/images/loading.gif" />`);
+
+    $.ajax({
+        url: url,
+        method: 'GET',
+        dataType: 'xml',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', `Bearer ${oauthToken}`);
+        },
+        success: function (data) {
+            try {
+                $("#GanttChartDIV").html("");
+
+                initGanttChart();
+                var xmlSerializer = new XMLSerializer();
+                JSGantt.parseXMLString(xmlSerializer.serializeToString(data), ganttChart);
+
+                ganttChart.Draw();
+
+                Swal.fire({
+                    type: 'success',
+                    title: 'Success',
+                    text: 'Your Gantt Chart has been loaded!'
+                });
+            } catch (e) {
+                console.log(e);
+                Swal.fire({
+                    type: 'error',
+                    title: 'Oops...',
+                    text: 'There\'s something wrong with your file. Please check again.'
+                });
+            }
+        },
+        error: function (error) {
+            console.log(error);
+            Swal.fire({
+                type: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong. Please refresh the page and try again.'
+            });
+        }
+    });
 }
 
 function getParameterByName(name) {
@@ -99,13 +140,12 @@ function getParameterByName(name) {
 //});
 
 function createPicker() {
-    var developerKey = $("[data-developer-key]").attr("data-developer-key");
     var appId = $("[data-app-id]").attr("data-app-id");
 
     var docsView = new google.picker.DocsView()
         .setIncludeFolders(false)
         .setSelectFolderEnabled(false)
-        .setQuery("*.swf");
+        .setQuery("*.xml");
 
     var picker = new google.picker.PickerBuilder()
         .addView(docsView)
@@ -171,26 +211,7 @@ $(function () {
 });
 
 $(document).ready(function () {
-    ganttChart = new JSGantt.GanttChart(document.getElementById('GanttChartDIV'), 'day');
-
-    ganttChart.setOptions({
-        vCaptionType: 'Complete',  // Set to Show Caption : None,Caption,Resource,Duration,Complete,
-        vQuarterColWidth: 36,
-        vDateTaskDisplayFormat: 'day dd month yyyy', // Shown in tool tip box
-        vDayMajorDateDisplayFormat: 'mon yyyy - Week ww',// Set format to dates in the "Major" header of the "Day" view
-        vWeekMinorDateDisplayFormat: 'dd mon', // Set format to display dates in the "Minor" header of the "Week" view
-        vLang: 'en',
-        vShowTaskInfoLink: 1, // Show link in tool tip (0/1)
-        vShowEndWeekDate: 0,  // Show/Hide the date for the last day of the week in header for daily
-        vAdditionalHeaders: { // Add data columns to your table
-            category: {
-                title: 'Category'
-            }
-        },
-        vUseSingleCell: 10000, // Set the threshold cell per table row (Helps performance for large data.
-        vFormatArr: ['Day', 'Week', 'Month', 'Quarter'], // Even with setUseSingleCell using Hour format on such a large chart can cause issues in some browsers,
-        vEventClickRow: onRowClick
-    });
+    initGanttChart();
 
     // Load from a Json url
     JSGantt.parseJSON(dataJsonUrl, ganttChart);
@@ -398,6 +419,29 @@ function initSelect2() {
     });
 }
 
+function initGanttChart() {
+    ganttChart = new JSGantt.GanttChart(document.getElementById('GanttChartDIV'), 'day');
+
+    ganttChart.setOptions({
+        vCaptionType: 'Complete',  // Set to Show Caption : None,Caption,Resource,Duration,Complete,
+        vQuarterColWidth: 36,
+        vDateTaskDisplayFormat: 'day dd month yyyy', // Shown in tool tip box
+        vDayMajorDateDisplayFormat: 'mon yyyy - Week ww',// Set format to dates in the "Major" header of the "Day" view
+        vWeekMinorDateDisplayFormat: 'dd mon', // Set format to display dates in the "Minor" header of the "Week" view
+        vLang: 'en',
+        vShowTaskInfoLink: 1, // Show link in tool tip (0/1)
+        vShowEndWeekDate: 0,  // Show/Hide the date for the last day of the week in header for daily
+        vAdditionalHeaders: { // Add data columns to your table
+            category: {
+                title: 'Category'
+            }
+        },
+        vUseSingleCell: 10000, // Set the threshold cell per table row (Helps performance for large data.
+        vFormatArr: ['Day', 'Week', 'Month', 'Quarter'], // Even with setUseSingleCell using Hour format on such a large chart can cause issues in some browsers,
+        vEventClickRow: onRowClick
+    });
+}
+
 function setSelectedTaskLabel(name) {
     $("#select-task-label").text(name);
 }
@@ -457,4 +501,24 @@ function getNextId() {
     }
 
     return id + 1;
+}
+
+function updateFileOnDrive(fileContent) {
+    var file = new Blob([fileContent], { type: 'text/xml' });
+
+    $.ajax({
+        url: `https://www.googleapis.com/upload/drive/v3/files/${driveFileInfo.docs[0].id}`,
+        method: "PATCH",
+        data: file,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', `Bearer ${loginService.getAccessToken()}`);
+            xhr.setRequestHeader('Content-Type', 'text/xml');
+        },
+        success: function (response) {
+
+        },
+        error: function (error) {
+
+        }
+    });
 }
