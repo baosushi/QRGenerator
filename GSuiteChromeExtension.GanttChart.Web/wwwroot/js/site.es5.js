@@ -1,7 +1,10 @@
-﻿var SCOPES = 'https://www.googleapis.com/auth/drive.file';
+﻿"use strict";
+
+var SCOPES = 'https://www.googleapis.com/auth/drive.file';
 var CLIENT_ID = $("#loader").attr("data-client-id");
 var DISCOVERY_DOCS = ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'];
-var authLoaded = false, pickerLoaded = false;
+var authLoaded = false,
+    pickerLoaded = false;
 var ganttChart;
 var selectedTask;
 var isEditTask;
@@ -74,7 +77,7 @@ function checkDriveParams() {
 function getUserSelectedFile() {
     var firstFile = driveFileInfo.docs[0];
 
-    var url = `api/file/getFile?Token=${oauthToken}&Id=${firstFile.id}`;
+    var url = "api/file/getFile?Token=" + oauthToken + "&Id=" + firstFile.id;
     var promise = window.ViewerInstance.loadDocumentByUrl(url);
     Promise.resolve(promise);
 }
@@ -102,19 +105,9 @@ function createPicker() {
     var developerKey = $("[data-developer-key]").attr("data-developer-key");
     var appId = $("[data-app-id]").attr("data-app-id");
 
-    var docsView = new google.picker.DocsView()
-        .setIncludeFolders(false)
-        .setSelectFolderEnabled(false)
-        .setQuery("*.swf");
+    var docsView = new google.picker.DocsView().setIncludeFolders(false).setSelectFolderEnabled(false).setQuery("*.swf");
 
-    var picker = new google.picker.PickerBuilder()
-        .addView(docsView)
-        .enableFeature(google.picker.Feature.NAV_HIDDEN)
-        .setAppId(appId)
-        .hideTitleBar()
-        .setOAuthToken(oauthToken)
-        .setCallback(pickerCallback)
-        .build();
+    var picker = new google.picker.PickerBuilder().addView(docsView).enableFeature(google.picker.Feature.NAV_HIDDEN).setAppId(appId).hideTitleBar().setOAuthToken(oauthToken).setCallback(pickerCallback).build();
 
     picker.setVisible(true);
 }
@@ -174,14 +167,14 @@ $(document).ready(function () {
     ganttChart = new JSGantt.GanttChart(document.getElementById('GanttChartDIV'), 'day');
 
     ganttChart.setOptions({
-        vCaptionType: 'Complete',  // Set to Show Caption : None,Caption,Resource,Duration,Complete,
+        vCaptionType: 'Complete', // Set to Show Caption : None,Caption,Resource,Duration,Complete,
         vQuarterColWidth: 36,
         vDateTaskDisplayFormat: 'day dd month yyyy', // Shown in tool tip box
-        vDayMajorDateDisplayFormat: 'mon yyyy - Week ww',// Set format to dates in the "Major" header of the "Day" view
+        vDayMajorDateDisplayFormat: 'mon yyyy - Week ww', // Set format to dates in the "Major" header of the "Day" view
         vWeekMinorDateDisplayFormat: 'dd mon', // Set format to display dates in the "Minor" header of the "Week" view
         vLang: 'en',
         vShowTaskInfoLink: 1, // Show link in tool tip (0/1)
-        vShowEndWeekDate: 0,  // Show/Hide the date for the last day of the week in header for daily
+        vShowEndWeekDate: 0, // Show/Hide the date for the last day of the week in header for daily
         vAdditionalHeaders: { // Add data columns to your table
             category: {
                 title: 'Category'
@@ -224,13 +217,7 @@ $(document).ready(function () {
         var $t = $(this),
             target = $t[0].href || $t.data("target") || $t.parents('.modal') || [];
 
-        $(target)
-            .find("input,textarea,select")
-            .val('')
-            .end()
-            .find("input[type=checkbox], input[type=radio]")
-            .prop("checked", "")
-            .end();
+        $(target).find("input,textarea,select").val('').end().find("input[type=checkbox], input[type=radio]").prop("checked", "").end();
     });
 });
 
@@ -292,7 +279,7 @@ function onDeleteButtonClick() {
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
+    }).then(function (result) {
         if (result.value) {
             ganttChart.RemoveTaskItem(selectedTask.getID());
             selectedTask = null;
@@ -300,11 +287,7 @@ function onDeleteButtonClick() {
             setSelectedTaskLabel('none');
             ganttChart.Draw();
 
-            Swal.fire(
-                'Deleted!',
-                'Your file has been deleted.',
-                'success'
-            );
+            Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
         }
     });
 }
@@ -458,3 +441,4 @@ function getNextId() {
 
     return id + 1;
 }
+

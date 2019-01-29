@@ -13,6 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="compilerconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <_ContentIncludedByDefault Remove="wwwroot\js\drive.js" />
     <_ContentIncludedByDefault Remove="wwwroot\js\drive.service.js" />
     <_ContentIncludedByDefault Remove="wwwroot\js\language.js" />
@@ -90,9 +94,6 @@
     <Content Update="wwwroot\js\site.js">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Update="wwwroot\js\site.min.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
     <Content Update="wwwroot\texts\languages.json">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
@@ -103,6 +104,10 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\lib\sweetalert2\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="compilerconfig.json" />
   </ItemGroup>
 
 </Project>
