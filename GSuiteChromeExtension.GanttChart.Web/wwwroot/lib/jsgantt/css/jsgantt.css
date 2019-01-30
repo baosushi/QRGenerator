@@ -1,9 +1,8 @@
 /* Sample CSS for jsGanttImproved v1.8.0 */
 
-div.gantt {
-  font-family: tahoma, arial, verdana, Sans-serif;
-  font-size: 10px;
-  color: #656565;
+#GanttChartDIV {
+    font-family: tahoma, arial, verdana, Sans-serif;
+    color: #656565;
 }
 
 .gantt table {

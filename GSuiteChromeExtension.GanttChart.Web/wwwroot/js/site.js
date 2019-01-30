@@ -292,10 +292,10 @@ function onEditButtonClick() {
 
     modal.find("input[name='task-name']").val(selectedTask.getName());
     modal.find("select[name='task-type']").val(selectedTask.getGroup());
-    modal.find("input[name='task-start']").val(selectedTask.getStart().toISOString().substr(0, 10));
-    modal.find("input[name='task-end']").val(selectedTask.getEnd().toISOString().substr(0, 10));
+    modal.find("input[name='task-start']").val(`${selectedTask.getStart().getFullYear()}-${selectedTask.getStart().getMonth() + 1 > 9 ? selectedTask.getStart().getMonth() + 1 : '0' + (selectedTask.getStart().getMonth() + 1)}-${selectedTask.getStart().getDate() > 9 ? selectedTask.getStart().getDate() : '0' + selectedTask.getStart().getDate()}`);
+    modal.find("input[name='task-end']").val(`${selectedTask.getEnd().getFullYear()}-${selectedTask.getEnd().getMonth() + 1 > 9 ? selectedTask.getEnd().getMonth() + 1 : '0' + (selectedTask.getEnd().getMonth() + 1)}-${selectedTask.getEnd().getDate() > 9 ? selectedTask.getEnd().getDate() : '0' + selectedTask.getEnd().getDate()}`);
     modal.find("input[name='task-resource-name']").val(selectedTask.getResource());
-    modal.find("select[name='task-dependency']").val(selectedTask.getDepend());
+    modal.find("select[name='task-dependency']").val(selectedTask.getDepend()).trigger("change");
     modal.find("input[name='task-category']").val(selectedTask.getDataObject().category);
     modal.find("input[name='task-note']").val(selectedTask.getNotes().textContent);
     modal.find("input[name='task-cost']").val(selectedTask.getCost());
@@ -328,6 +328,18 @@ function onDeleteButtonClick() {
             );
         }
     });
+}
+
+function onSaveButtonClick() {
+    if (driveFileInfo) {
+        updateFileOnDrive(ganttChart.getXMLProject());
+    } else {
+        onSaveAsButtonClick();
+    }
+}
+
+function onSaveAsButtonClick() {
+
 }
 
 //function validateModal() {
@@ -402,8 +414,12 @@ function modalAction(e) {
 }
 
 function initSelect2() {
-    var dataSource = getSelect2TaskList();
+    var dataSourceOriginal = getSelect2TaskList(true);
+    var dataSource = getSelect2TaskList(false);
 
+    dataSourceOriginal.unshift({ id: 0, text: "None" });
+
+    $("select[name='task-dependency']").empty().trigger('change');
     $("select[name='task-dependency']").select2({
         data: dataSource,
         multiple: true,
@@ -411,8 +427,9 @@ function initSelect2() {
         containerCssClass: "form-control-border"
     });
 
+    $("select[name='task-parent']").empty().trigger('change');
     $("select[name='task-parent']").select2({
-        data: dataSource,
+        data: dataSourceOriginal,
         multiple: false,
         width: "100%",
         containerCssClass: "form-control-border"
@@ -476,13 +493,20 @@ function getTaskByOriginalId(id) {
     return task;
 }
 
-function getSelect2TaskList() {
+function getSelect2TaskList(getOriginal) {
     var result = [];
     ganttChart.vTaskList.forEach(function (v, i) {
-        result.push({
-            id: v.getID(),
-            text: v.getName()
-        });
+        if (getOriginal) {
+            result.push({
+                id: v.getOriginalID(),
+                text: v.getName()
+            });
+        } else {
+            result.push({
+                id: v.getID(),
+                text: v.getName()
+            });
+        }
     });
 
     return result;
@@ -504,21 +528,44 @@ function getNextId() {
 }
 
 function updateFileOnDrive(fileContent) {
+    Swal.fire({
+        title: 'Saving...',
+        text: 'Your work is being saved. Please wait.',
+        imageUrl: '/images/loading.gif',
+        //imageWidth: 400,
+        //imageHeight: 200,
+        imageAlt: 'Custom image',
+        showConfirmButton: false
+    });
+
     var file = new Blob([fileContent], { type: 'text/xml' });
 
     $.ajax({
         url: `https://www.googleapis.com/upload/drive/v3/files/${driveFileInfo.docs[0].id}`,
         method: "PATCH",
         data: file,
+        processData: false,
         beforeSend: function (xhr) {
             xhr.setRequestHeader('Authorization', `Bearer ${loginService.getAccessToken()}`);
             xhr.setRequestHeader('Content-Type', 'text/xml');
         },
         success: function (response) {
+            Swal.close();
 
+            Swal.fire({
+                type: 'success',
+                title: 'Your work has been saved.',
+                showConfirmButton: true
+            });
         },
         error: function (error) {
+            Swal.close();
 
+            Swal.fire({
+                type: 'error',
+                title: 'An error happened. Please try again.',
+                showConfirmButton: true
+            });
         }
     });
 }

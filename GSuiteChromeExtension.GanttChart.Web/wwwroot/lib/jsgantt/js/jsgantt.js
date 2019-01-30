@@ -2676,9 +2676,9 @@ exports.TaskItem = function (pID, pName, pStart, pEnd, pClass, pLink, pMile, pRe
     this.setLevel = function (pLevel) { vLevel = parseInt(document.createTextNode(pLevel).data); };
     this.setNumKid = function (pNumKid) { vNumKid = parseInt(document.createTextNode(pNumKid).data); };
     this.setWeight = function (pWeight) { vWeight = parseInt(document.createTextNode(pWeight).data); };
-    this.setCompVal = function (pCompVal) { vCompVal = parseFloat(document.createTextNode(pCompVal).data); };
+    this.setCompVal = function (pCompVal) { vComp = vCompVal = parseFloat(document.createTextNode(pCompVal).data); };
     this.setCost = function (pCost) {
-        vComp = parseInt(document.createTextNode(pCost).data);
+        vCost = parseInt(document.createTextNode(pCost).data);
     };
     this.setStartX = function (pX) { x1 = parseInt(document.createTextNode(pX).data); };
     this.setStartY = function (pY) { y1 = parseInt(document.createTextNode(pY).data); };
