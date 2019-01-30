@@ -339,7 +339,25 @@ function onSaveButtonClick() {
 }
 
 function onSaveAsButtonClick() {
+    $.ajax({
+        url: "/api/generator/generate",
+        method: "POST",
+        contentType: "application/json",
+        data: JSON.stringify({
+            Token: oauthToken,
+            File: driveFileInfo.docs[0],
+            WithDescription: $("#with-description").is(":checked"),
+            Repetition: $("#repetition").val()
+        })
+    }).done(response => {
+        var filename = driveFileInfo.docs[0].id + ".docx";
 
+        gapi.savetodrive.render("btn-drive-button", {
+            src: response.path,
+            filename: filename,
+            sitename: 'QRGenerator'
+        });
+    });
 }
 
 //function validateModal() {
