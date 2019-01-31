@@ -101,7 +101,8 @@ function createPicker() {
 
     var docsView = new google.picker.DocsView()
         .setIncludeFolders(false)
-        .setSelectFolderEnabled(false);
+        .setSelectFolderEnabled(false)
+        .setQuery("*.mp4");
 
     var picker = new google.picker.PickerBuilder()
         .addView(docsView)
@@ -164,8 +165,11 @@ function getUserSelectedFile() {
     video[0].addEventListener('loadeddata', function () {
         if (this.readyState >= 2) {
             $("#controls").removeClass("d-none");
-            $("#slider-range").html("");
+            if ($("#btn-generate").hasClass("d-none")) {
+                $("#btn-generate").removeClass("d-none");
+            }
 
+            $("#slider-range").html("");
             $("#slider-range").slider({
                 range: true,
                 min: 0,
@@ -264,8 +268,12 @@ $('#btn-generate').click(function () {
 });
 
 $("#btn-download").click(function () {
+    var array = _base64ToArrayBuffer($("img#result")[0].src.replace("data:image/gif;base64,", ""));
+    var image = new Blob([array], { type: "image/gif" });
+    var url = URL.createObjectURL(image);
+
     var a = $("<a>")
-        .attr("href", $("img#result")[0].src)
+        .attr("href", url)
         .attr("download", "generated-gif.gif")
         .appendTo("body");
     a[0].click();
@@ -276,3 +284,13 @@ $(function () {
     $("#btn-select-file").click(onSelectFileButtonClick);
     $("#btn-save-to-drive").click(onSaveButtonClick);
 });
+
+function _base64ToArrayBuffer(base64) {
+    var binary_string = window.atob(base64);
+    var len = binary_string.length;
+    var bytes = new Uint8Array(len);
+    for (var i = 0; i < len; i++) {
+        bytes[i] = binary_string.charCodeAt(i);
+    }
+    return bytes.buffer;
+}

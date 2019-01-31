@@ -23,7 +23,7 @@ namespace GSuiteChromeExtension.GifMaker.Web.Controllers
         }
 
         [HttpGet, Route("getFile")]
-        public async Task<IActionResult> GetFile(string Token, string Id, string Name)
+        public async Task<IActionResult> GetFile(string Token, string Id, string Name, bool partialDownload = true)
         {
             var url = $"https://www.googleapis.com/drive/v3/files/{Id}?alt=media";
             //var item = await GetGoogleApiResponse<Stream>(url, Token);
@@ -39,7 +39,7 @@ namespace GSuiteChromeExtension.GifMaker.Web.Controllers
             ms.Seek(0, SeekOrigin.Begin);
             var item = ms.ToArray();
 
-            return File(item, "video/mp4", true);
+            return File(item, "video/mp4", partialDownload);
         }
 
         private async Task<byte[]> GetGoogleApiResponse<T>(string url, string token)

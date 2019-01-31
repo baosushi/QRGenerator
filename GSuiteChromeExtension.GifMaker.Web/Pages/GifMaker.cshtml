@@ -21,7 +21,10 @@
 
 <h2>@(title)</h2>
 <p>@this.texts.GetText("GifMaker_Description")</p>
-
+<br />
+<p>1. Browse your video file from your Google Drive using the Browse button below.</p>
+<p>2. Choose a time loop that you want to make into a GIF image using the slider.</p>
+<p>3. View your file in this application for free, no need to install anything!</p>
 <hr />
 
 <div class="text-center">
@@ -51,7 +54,7 @@
 
 <div class="form-group row">
     <div class="col-lg-12">
-        <video id="video" controls class="d-none"></video>
+        <video id="video" controls class="d-none" onloadedmeta="this.play()" preload></video>
     </div>
 </div>
 
@@ -60,14 +63,14 @@
         Start:
     </label>
     <div class="col-lg-3">
-        <input id="start-time" value="0" />
+        <input class="form-control" id="start-time" value="0" readonly />
     </div>
     <br />
     <label class="col-lg-1 col-form-label">
         End:
     </label>
     <div class="col-lg-3">
-        <input id="end-time" value="0" />
+        <input class="form-control" id="end-time" value="0" readonly />
     </div>
 </div>
 
