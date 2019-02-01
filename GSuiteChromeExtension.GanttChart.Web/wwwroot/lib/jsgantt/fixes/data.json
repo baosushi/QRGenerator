@@ -16,9 +16,7 @@
     "pOpen": 1,
     "pDepend": "",
     "pCaption": "",
-    "pNotes": "Some Notes text",
-    "category": "Planning",
-    "sector": "CMO"
+    "pNotes": "Some Notes text"
   },
   {
     "pID": 11,
@@ -35,9 +33,7 @@
     "pOpen": 1,
     "pDepend": "",
     "pCaption": "",
-    "pNotes": "",
-    "category": "Executive",
-    "sector": "CEO"
+    "pNotes": ""
   },
   {
     "pID": 12,
@@ -58,7 +54,7 @@
   },
   {
     "pID": 121,
-    "pName": "<a href='yahoo.com'>Constructor Proc #1234 of February 2018</a>",
+    "pName": "Constructor Proc #1234 of February 2018",
     "pStart": "2018-06-21",
     "pEnd": "2018-07-09",
     "pClass": "gtaskblue",
