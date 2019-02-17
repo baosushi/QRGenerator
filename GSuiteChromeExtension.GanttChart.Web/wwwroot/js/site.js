@@ -36,7 +36,7 @@ function updateSigninStatus(isSignedIn) {
     if (isSignedIn) {
         checkDriveParams();
     } else {
-        loginService.signIn();
+        //loginService.signIn();
     }
 }
 
@@ -73,7 +73,7 @@ function checkDriveParams() {
 
 function getUserSelectedFile() {
     var firstFile = driveFileInfo.docs[0];
-    
+
     var url = `https://www.googleapis.com/drive/v3/files/${firstFile.id}?alt=media`;
 
     $("#GanttChartDIV").html(`<img src="/images/loading.gif" />`);
@@ -235,8 +235,7 @@ $(document).ready(function () {
         pDepend: "",
         pCaption: "",
         pCost: 1000,
-        pNotes: "Some Notes text",
-        category: "Example"
+        pNotes: "Some Notes text"
     });
 
     ganttChart.Draw();
@@ -296,7 +295,6 @@ function onEditButtonClick() {
     modal.find("input[name='task-end']").val(`${selectedTask.getEnd().getFullYear()}-${selectedTask.getEnd().getMonth() + 1 > 9 ? selectedTask.getEnd().getMonth() + 1 : '0' + (selectedTask.getEnd().getMonth() + 1)}-${selectedTask.getEnd().getDate() > 9 ? selectedTask.getEnd().getDate() : '0' + selectedTask.getEnd().getDate()}`);
     modal.find("input[name='task-resource-name']").val(selectedTask.getResource());
     modal.find("select[name='task-dependency']").val(selectedTask.getDepend()).trigger("change");
-    modal.find("input[name='task-category']").val(selectedTask.getDataObject().category);
     modal.find("input[name='task-note']").val(selectedTask.getNotes().textContent);
     modal.find("input[name='task-cost']").val(selectedTask.getCost());
     modal.find("input[name='task-completion']").val(selectedTask.getCompVal());
@@ -339,25 +337,72 @@ function onSaveButtonClick() {
 }
 
 function onSaveAsButtonClick() {
-    $.ajax({
-        url: "/api/generator/generate",
-        method: "POST",
-        contentType: "application/json",
-        data: JSON.stringify({
-            Token: oauthToken,
-            File: driveFileInfo.docs[0],
-            WithDescription: $("#with-description").is(":checked"),
-            Repetition: $("#repetition").val()
-        })
-    }).done(response => {
-        var filename = driveFileInfo.docs[0].id + ".docx";
+    Swal.fire({
+        title: 'Enter the name of your file',
+        input: 'text',
+        inputAttributes: {
+            autocapitalize: 'off'
+        },
+        showCancelButton: true,
+        confirmButtonText: 'Proceed',
+        showLoaderOnConfirm: true,
+        preConfirm: (name) => {
+            return name;
+        },
+        allowOutsideClick: () => !Swal.isLoading()
+    }).then((result) => {
+        $.ajax({
+            url: "/api/generator/generate",
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({
+                Token: loginService.getAccessToken(),
+                XmlContent: ganttChart.getXMLProject()
+            })
+        }).done(response => {
+            var filename = response.fileName;
 
-        gapi.savetodrive.render("btn-drive-button", {
-            src: response.path,
-            filename: filename,
-            sitename: 'QRGenerator'
+            if (result && result.value) {
+                if (!result.value.endsWith(".xml")) {
+                    result.value = result.value + ".xml";
+                }
+
+                Swal.fire({
+                    title: '<strong>Save file to Google Drive</strong>',
+                    type: 'info',
+                    html:
+                        'Save your file to your Google Drive using this button <div id="btn-drive-button"></div>',
+                    showCloseButton: true,
+                    onClose: () => {
+                        $.ajax({
+                            url: "/api/generator/delete",
+                            method: "POST",
+                            contentType: "application/json",
+                            data: JSON.stringify({
+                                FileName: filename
+                            })
+                        });
+                    }
+                });
+
+                gapi.savetodrive.render("btn-drive-button", {
+                    src: response.path,
+                    filename: result.value,
+                    sitename: 'Free Gantt Chart'
+                });
+            }
         });
     });
+
+    //Swal.fire({
+    //    title: '<strong>Save file to Google Drive</strong>',
+    //    type: 'info',
+    //    html:
+    //        'Save your file to your Google Drive using this button <div id="btn-drive-button"></div>',
+    //    showCloseButton: true,
+    //    showCancelButton: true,
+    //    focusConfirm: false
+    //});
 }
 
 //function validateModal() {
@@ -383,7 +428,6 @@ function modalAction(e) {
     var endDate = modal.find("input[name='task-end']").val();
     var resourceName = modal.find("input[name='task-resource-name']").val();
     var dependency = modal.find("select[name='task-dependency']").val();
-    var category = modal.find("input[name='task-category']").val();
     var note = modal.find("input[name='task-note']").val();
     var cost = modal.find("input[name='task-cost']").val();
     var completion = modal.find("input[name='task-completion']").val();
@@ -397,7 +441,6 @@ function modalAction(e) {
         selectedTask.setEnd(endDate);
         selectedTask.setResource(resourceName);
         selectedTask.setDepend(dependency);
-        selectedTask.getDataObject().category = category;
         selectedTask.getNotes().textContent = note;
         selectedTask.setCost(cost);
         selectedTask.setCompVal(completion);
@@ -421,8 +464,7 @@ function modalAction(e) {
             pDepend: dependency,
             pCaption: "",
             pCost: cost,
-            pNotes: note,
-            category: category
+            pNotes: note
         });
     }
 
@@ -466,11 +508,6 @@ function initGanttChart() {
         vLang: 'en',
         vShowTaskInfoLink: 1, // Show link in tool tip (0/1)
         vShowEndWeekDate: 0,  // Show/Hide the date for the last day of the week in header for daily
-        vAdditionalHeaders: { // Add data columns to your table
-            category: {
-                title: 'Category'
-            }
-        },
         vUseSingleCell: 10000, // Set the threshold cell per table row (Helps performance for large data.
         vFormatArr: ['Day', 'Week', 'Month', 'Quarter'], // Even with setUseSingleCell using Hour format on such a large chart can cause issues in some browsers,
         vEventClickRow: onRowClick
