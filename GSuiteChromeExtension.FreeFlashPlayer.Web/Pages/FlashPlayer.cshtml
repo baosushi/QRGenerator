@@ -11,6 +11,21 @@
     <link async href="~/lib/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
     <link async href="~/lib/jquery-ui/jquery-ui.structure.min.css" rel="stylesheet" />
     <link async href="~/lib/jquery-ui/jquery-ui.theme.min.css" rel="stylesheet" />
+    <link async href="~/css/design1.min.css" rel="stylesheet" />
+
+    <style>
+        footer.footer {
+            padding: 0px;
+        }
+
+        .page-content p, .page-content span {
+            color: #000;
+        }
+
+        .page-content .btn {
+            color: #000;
+        }
+    </style>
 }
 
 <div id="loader"
@@ -50,13 +65,17 @@
     </div>
 </div>
 
-<hr />
+<br />
 
-<div class="d-none" id="flash-container">
-    <object src="" width="600" height="400">
-        <param name="src" value="" />
-        <embed src="" width="600" height="400" />
-    </object>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="d-none" style="margin: auto; width: fit-content;" id="flash-container">
+            <object src="" width="600" height="400">
+                <param name="src" value="" />
+                <embed src="" width="600" height="400" />
+            </object>
+        </div>
+    </div>
 </div>
 
 <div class="row">

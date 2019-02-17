@@ -39,6 +39,9 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Pages\Shared\_Layout_Old.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Pages\Shared\_Layout.cshtml">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <Pack>$(IncludeRazorContentInPack)</Pack>

@@ -1,0 +1,48 @@
+.top-panel {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    color: #fff;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+    .top-panel .title-h1 {
+        font-weight: lighter;
+        font-size: 5rem;
+    }
+
+    .top-panel .subtitle {
+        font-weight: normal;
+        font-size: 1.5rem;
+    }
+
+.btn {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    width: 400px;
+    max-width: 90%;
+    margin-top: 20px;
+}
+
+.top-panel .top-cover {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -2;
+}
+
+.top-panel .dark-cover {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,.5);
+    z-index: -1;
+}
