@@ -11,6 +11,21 @@
     <link async href="~/lib/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
     <link async href="~/lib/jquery-ui/jquery-ui.structure.min.css" rel="stylesheet" />
     <link async href="~/lib/jquery-ui/jquery-ui.theme.min.css" rel="stylesheet" />
+    <link async href="~/css/design1.min.css" rel="stylesheet" />
+
+    <style>
+        footer.footer {
+            padding: 0px;
+        }
+
+        .page-content p, .page-content span {
+            color: #000;
+        }
+
+        .page-content .btn {
+            color: #000;
+        }
+    </style>
 }
 
 <div id="loader"
@@ -20,9 +35,9 @@
      class="d-none"></div>
 
 <h2>@(title)</h2>
-<p>@this.texts.GetText("GifMaker_Description")</p>
+<p>@this.texts.GetText("Description")</p>
 <br />
-<p>1. Browse your video file from your Google Drive using the Browse button below.</p>
+<p>1. Browse your video file from your Google Drive using the Browse button below (Authenticate this app once if required).</p>
 <p>2. Choose a time loop that you want to make into a GIF image using the slider.</p>
 <p>3. View your file in this application for free, no need to install anything!</p>
 <hr />
@@ -46,7 +61,7 @@
             <img src="~/images/logo-drive.png" class="img-inline" />
             @this.texts.GetText("GifMaker_GeneratePicker")
         </button>
-        <span><span>@this.texts.GetText("GifMaker_Selected")</span>@*<span id="lbl-selected-filename">@this.texts.GetText("GifMaker_None")</span>*@</span>
+        <span><span>@this.texts.GetText("GifMaker_Selected")</span><span id="lbl-selected-filename">@this.texts.GetText("GifMaker_None")</span></span>
     </div>
 </div>
 

@@ -1,44 +1,317 @@
 ﻿@page
+
 @{
-    var title = this.texts.GetText("GifMaker_Title");
+    var title = this.texts.GetText("Title");
     this.ViewBag.Title = title;
+    this.Layout = null;
 }
-<h1>Welcome to @title</h1>
-<p>@this.texts.GetText("GifMaker_Description")</p>
+@*<h1>Welcome to @title</h1>
+    <p>@this.texts.GetText("GifMaker_Description")</p>
 
-<div class="text-center">
-    <div id="sp-0" class="sp sp-wide">
-        <p class="text-right"><span>@this.texts.GetText("SponsoredLink")</span></p>
+    <div class="text-center">
+        <div id="sp-0" class="sp sp-wide">
+            <p class="text-right"><span>@this.texts.GetText("SponsoredLink")</span></p>
 
-        <div class="sp-container">
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> <!-- 728 x 90 --> <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-6475235154742772" data-ad-slot="1982829070"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            <div class="sp-container">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> <!-- 728 x 90 --> <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-6475235154742772" data-ad-slot="1982829070"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            </div>
         </div>
     </div>
-</div>
 
-<h3><i class="fa fa-lock"></i> Safety first!</h3>
-<p> You care about privacy. We care about privacy. That's why all the data sending to our server are only keep within the processing and deleted immediately after. Check out our privacy policy for more information. </p>
-<h3><i class="fa fa-random"></i> Any operating system works</h3>
-<p> Our game tools work for all computers - the operating system you use doesn't matter. You can use our service even if you're using MacOS. </p>
-<h3><i class="fa fa-cloud"></i> All in the cloud</h3>
-<p> Our servers in the cloud help you to get access to game tools and you don't need to install anything on your computer. Isn't that great? This is a totally free online service. </p>
+    <h3><i class="fa fa-lock"></i> Safety first!</h3>
+    <p> You care about privacy. We care about privacy. That's why all the data sending to our server are only keep within the processing and deleted immediately after. Check out our privacy policy for more information. </p>
+    <h3><i class="fa fa-random"></i> Any operating system works</h3>
+    <p> Our game tools work for all computers - the operating system you use doesn't matter. You can use our service even if you're using MacOS. </p>
+    <h3><i class="fa fa-cloud"></i> All in the cloud</h3>
+    <p> Our servers in the cloud help you to get access to game tools and you don't need to install anything on your computer. Isn't that great? This is a totally free online service. </p>
 
-<hr />
+    <hr />
 
-<p class="text-center">
-    <a class="btn btn-primary btn-lg" href="/gif-maker">
-        <span>@title</span>
-    </a>
-</p>
+    <p class="text-center">
+        <a class="btn btn-primary btn-lg" href="/gif-maker">
+            <span>@title</span>
+        </a>
+    </p>
 
-<div class="text-center">
-    <div id="sp-0" class="sp sp-wide">
-        <p class="text-right"><span>@this.texts.GetText("SponsoredLink")</span></p>
+    <div class="text-center">
+        <div id="sp-0" class="sp sp-wide">
+            <p class="text-right"><span>@this.texts.GetText("SponsoredLink")</span></p>
 
-        <div class="sp-container">
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> <!-- 728 x 90 --> <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-6475235154742772" data-ad-slot="1982829070"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            <div class="sp-container">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> <!-- 728 x 90 --> <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-6475235154742772" data-ad-slot="1982829070"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            </div>
+        </div>
+    </div>*@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link async rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
+    @*<link async rel="stylesheet" href="~/css/design1.min.css" asp-append-version="true" />*@
+    <link async rel="stylesheet" href="~/css/main.css" asp-append-version="true" />
+    <title>@(this.ViewBag.Title)</title>
+
+    <style>
+        .sp {
+            max-width: 100%;
+            margin: 15px auto;
+            text-align: center;
+            background: #edeae4;
+            display: inline-block;
+            padding: 5px 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <link href="/css/background.css" rel="stylesheet" />
+
+    <div class="top-panel">
+        <p class="title-h1">@title</p>
+        <h2 class="subtitle" style="color:#a0a6ad">@this.texts.GetText("ShortDescription")</h2>
+        <a href="/gif-maker" class="btn btn-primary" style="border-radius: 7px; height:70px; line-height:40px; font-size:20px;">@this.texts.GetText("Index_ButtonAction")</a>
+        <div class="top-cover background-fill" style="background-image:url(/images/1.jpg);"></div>
+        <div class="dark-cover"></div>
+    </div>
+
+
+
+    @*
+        <div class="text-center">
+            <div id="sp-0" class="sp sp-wide">
+                <p class="text-right"><span>@this.texts.GetText("SponsoredLink")</span></p>
+
+                <div class="sp-container">
+                    <script async=async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js">
+                    </script> <!-- 728 x 90 --> <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-6475235154742772" data-ad-slot="1982829070"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+            </div>
+        </div>
+    *@
+
+
+
+    <div class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="row">
+                    <div class="col-lg-3" style="">
+                        <div style="width: 170px; height: 62px; border: 2px solid #4cb5fd; padding-top: 5px; border-style: dashed; border-radius: 7px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="28" viewBox="0 0 32 28">
+                                <image id="Google_Drive_Logo" width="32" height="28" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAcCAYAAAAAwr0iAAAEMElEQVRIiZVWW2gcVRj+zpnLdnczbTZJifWWBy+lsXmRNIoKfaimD/omGF+sA0qw+iDSPhQUNLY+iEitIBVEiMU+jE9W8KFNNeTBpqkEQdBg21haTcxumjXJ7nYmOzeZncvOzM7Nj4Gd859zvu/7/z2XIcgAQRLzB9na3Nd3rw6R1gz/NOI+7TZwEwR7+JFpOY2dZjEA4Oh5pTj02VrXUlA85MVtEAwA5GgW4tQKCJJ4L4A/YKLANmT9xp4yyVOTetOJS+KJu9R3AOzmR378O4k/SwU+BFCwiFVQ5vWl7nK6/VZHwZmbiMQKCJL4BICf3LapqCCqhvmHVxsDvFFMyL5thZAnuX0/XIrTiK2AIIlW36lAXgyFaQIv3upRU7J3xa2fU+rPB2J1kv6ClwEMByKMPfyqzHRfqOXKgb74Wg47XCl2fRAkUQBwDUB/uM+sKbDKILBo3hgs8zRQ/iCdUwELZYA8xO27WAvzxVXgnSjxFpwq1DTwH5SF5djMSOCs6Hc4O8eFA4IkPgjgNwB8JHNTay1GCyyFUdlb0UHAhelCBqynCeARbvjidT9dVAU+jhVHuwIWNMrMA/g0VdwG73AHEKiAIImjAM7HijswN2VLxQDP3F/dvVwHsdYL2ZmQvfdOgIPs8NQFN+KlI0giC+BkmngLVhVY+lX90Nkl/rHpDQBvZ5pn46Q2/wzbYQDAYQCDWRgIx90EJeO+0JeGiV8zGhh0tNoGBEnsBTCRSdykyMsPvFE/dFZzY/zItHFH0T9f21BRl3U0VcMd7Z/pXyUT2vxor2cAwHEApSwGWKXnu8r4u9+H4z37Z04zlNySFR3rNRWr/25hs65iS9Vbp2cIJUcTVJDEIQDjHUMiQHVe5uS+Y3H9HEtecNefJao0dWzUVNyuKljfbEJWNBhtN+Pa/OiQe94zGbM/XT58bCGuv7R/Zo7n6Ew4bkk2VR2bDRWrVQXVdQUNWWVUzfiCCJI4C+DxNPGu24+u9V19ttcfo1weLN/l7DQ7dY7R0JOrem37hA6+u2uBZ9RfrO3wJoDLaVdz3+JzeTsXGwxXAOWLHeM0g0VF7veuhgQDJiHkNVobm7wC4EyS+M4/n1+Gbha8zPkuUK6QNCULzlx6L3/F3QXWwqpHTaJa3iyW93oXE5MTQNltKfydyz6EuqNpb8Pa2OQKgBNRI3f9/uoKTIOxCkhz20GY3P9K04z2c2J2orDiGXDwCYBF/6hc/b4GVy/tsv63ljjlMqsk1GDR0ULAQG1scgvAEf/IuxZearbE+R0glA0TRcqkFt/EkdmJwlaHAcfEOQBT1vuOf56qEI0vUX47CKEBhmjeTA6mLr9fOOcPRH0PvGWdeaW/nt5miSMgniCcDt3mDiJy7w989M0r3ZUD94BS+9PHd8cH9rWz2dt7PjrutBbmjhe/DQgB+A+xIz3fYv0SvgAAAABJRU5ErkJggg==" />
+                            </svg> <br /> <span style="color:black;"> Work with Google Drive</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div style="width: 170px; height: 62px; border: 2px solid #4cb5fd; padding-top: 5px; border-style: dashed; border-radius: 7px;">
+                            <svg enable-background="new 0 0 24 24" height="24px" id="Layer_1" version="1.1" viewBox="0 0 24 24" width="24px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M21.635,6.366c-0.467-0.772-1.043-1.528-1.748-2.229c-0.713-0.708-1.482-1.288-2.269-1.754L19,1C19,1,21,1,22,2S23,5,23,5  L21.635,6.366z M10,18H6v-4l0.48-0.48c0.813,0.385,1.621,0.926,2.348,1.652c0.728,0.729,1.268,1.535,1.652,2.348L10,18z M20.48,7.52  l-8.846,8.845c-0.467-0.771-1.043-1.529-1.748-2.229c-0.712-0.709-1.482-1.288-2.269-1.754L16.48,3.52  c0.813,0.383,1.621,0.924,2.348,1.651C19.557,5.899,20.097,6.707,20.48,7.52z M4,4v16h16v-7l3-3.038V21c0,1.105-0.896,2-2,2H3  c-1.104,0-2-0.895-2-2V3c0-1.104,0.896-2,2-2h11.01l-3.001,3H4z" /></svg> <br />
+                            <span style=" color: black;">Easy To Use</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+
+    <!-- features Section Start -->
+    <div id="" class="section">
+        <div class="container">
+            <div class="section-header" id="section-notepad" style="color: black; font-size: 26px;">
+
+                <div class="row">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-10 lg-content">
+                        <p>@this.texts.GetText("Index_Description")</p>
+                        <p style="color: #ff2c00">So what we do offer?</p>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-8">
+                        <div class="content-notepad">
+
+                            <div class="row" style="margin-top: 60px">
+                                <div class="col-md-6">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="28" viewBox="0 0 32 28">
+                                        <image id="Google_Drive_Logo" width="32" height="28" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAcCAYAAAAAwr0iAAAEMElEQVRIiZVWW2gcVRj+zpnLdnczbTZJifWWBy+lsXmRNIoKfaimD/omGF+sA0qw+iDSPhQUNLY+iEitIBVEiMU+jE9W8KFNNeTBpqkEQdBg21haTcxumjXJ7nYmOzeZncvOzM7Nj4Gd859zvu/7/z2XIcgAQRLzB9na3Nd3rw6R1gz/NOI+7TZwEwR7+JFpOY2dZjEA4Oh5pTj02VrXUlA85MVtEAwA5GgW4tQKCJJ4L4A/YKLANmT9xp4yyVOTetOJS+KJu9R3AOzmR378O4k/SwU+BFCwiFVQ5vWl7nK6/VZHwZmbiMQKCJL4BICf3LapqCCqhvmHVxsDvFFMyL5thZAnuX0/XIrTiK2AIIlW36lAXgyFaQIv3upRU7J3xa2fU+rPB2J1kv6ClwEMByKMPfyqzHRfqOXKgb74Wg47XCl2fRAkUQBwDUB/uM+sKbDKILBo3hgs8zRQ/iCdUwELZYA8xO27WAvzxVXgnSjxFpwq1DTwH5SF5djMSOCs6Hc4O8eFA4IkPgjgNwB8JHNTay1GCyyFUdlb0UHAhelCBqynCeARbvjidT9dVAU+jhVHuwIWNMrMA/g0VdwG73AHEKiAIImjAM7HijswN2VLxQDP3F/dvVwHsdYL2ZmQvfdOgIPs8NQFN+KlI0giC+BkmngLVhVY+lX90Nkl/rHpDQBvZ5pn46Q2/wzbYQDAYQCDWRgIx90EJeO+0JeGiV8zGhh0tNoGBEnsBTCRSdykyMsPvFE/dFZzY/zItHFH0T9f21BRl3U0VcMd7Z/pXyUT2vxor2cAwHEApSwGWKXnu8r4u9+H4z37Z04zlNySFR3rNRWr/25hs65iS9Vbp2cIJUcTVJDEIQDjHUMiQHVe5uS+Y3H9HEtecNefJao0dWzUVNyuKljfbEJWNBhtN+Pa/OiQe94zGbM/XT58bCGuv7R/Zo7n6Ew4bkk2VR2bDRWrVQXVdQUNWWVUzfiCCJI4C+DxNPGu24+u9V19ttcfo1weLN/l7DQ7dY7R0JOrem37hA6+u2uBZ9RfrO3wJoDLaVdz3+JzeTsXGwxXAOWLHeM0g0VF7veuhgQDJiHkNVobm7wC4EyS+M4/n1+Gbha8zPkuUK6QNCULzlx6L3/F3QXWwqpHTaJa3iyW93oXE5MTQNltKfydyz6EuqNpb8Pa2OQKgBNRI3f9/uoKTIOxCkhz20GY3P9K04z2c2J2orDiGXDwCYBF/6hc/b4GVy/tsv63ljjlMqsk1GDR0ULAQG1scgvAEf/IuxZearbE+R0glA0TRcqkFt/EkdmJwlaHAcfEOQBT1vuOf56qEI0vUX47CKEBhmjeTA6mLr9fOOcPRH0PvGWdeaW/nt5miSMgniCcDt3mDiJy7w989M0r3ZUD94BS+9PHd8cH9rWz2dt7PjrutBbmjhe/DQgB+A+xIz3fYv0SvgAAAABJRU5ErkJggg==" />
+                                    </svg><span style="margin-left: 5px;">Drive integrated</span>
+                                </div>
+                                <div class="col-md-6">
+                                    <svg enable-background="new 0 0 24 24" height="24px" id="Layer_1" version="1.1" viewBox="0 0 24 24" width="24px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M21.635,6.366c-0.467-0.772-1.043-1.528-1.748-2.229c-0.713-0.708-1.482-1.288-2.269-1.754L19,1C19,1,21,1,22,2S23,5,23,5  L21.635,6.366z M10,18H6v-4l0.48-0.48c0.813,0.385,1.621,0.926,2.348,1.652c0.728,0.729,1.268,1.535,1.652,2.348L10,18z M20.48,7.52  l-8.846,8.845c-0.467-0.771-1.043-1.529-1.748-2.229c-0.712-0.709-1.482-1.288-2.269-1.754L16.48,3.52  c0.813,0.383,1.621,0.924,2.348,1.651C19.557,5.899,20.097,6.707,20.48,7.52z M4,4v16h16v-7l3-3.038V21c0,1.105-0.896,2-2,2H3  c-1.104,0-2-0.895-2-2V3c0-1.104,0.896-2,2-2h11.01l-3.001,3H4z" /></svg>
+                                    <span style="margin-left: 5px;">Powerful engine to create GIF</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--  -->
+    <div id="" class="section">
+        <div class="container">
+            <div class="" id="section-notepad-black">
+                <div class="row" style="margin-bottom: 70px; ">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-10">
+                        <p style="font-size: 26px; color: #ffffff; margin-top: 30px; font-family: 'Roboto', sans-serif; text-align: center;">
+                            @this.texts.GetText("Description")
+                        </p>
+                    </div>
+                    <div class="col-lg-1"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4"></div>
+                    <div class="col-lg-4">
+                        <a class="btn btn-primary btn-lg" style="border-radius: 7px; height:70px; line-height:40px; font-size:20px;" href="/gif-maker">
+                            <span>@this.texts.GetText("Index_ButtonAction")</span>
+                        </a>
+                    </div>
+                    <div class="col-lg-4"></div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!--  -->
+    <!-- Start Pricing Table Section -->
+    <!-- End Pricing Table Section -->
+
+    <div id="app-features" class="section">
+        <div class="container-fluid" style="background-color: #f1f1f1;">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-lg-4 col-md-12 col-xs-12" style="margin-top:50px; margin-bottom:50px;">
+
+                        <div class="content-left">
+
+                            <div class="box-item left">
+
+                                <div class="text">
+                                    <h5 style="font-size:30px;"><i class="fa fa-lock"></i> Safety first!</h5>
+                                    <p>You care about privacy. We care about privacy. That's why all files are deleted from our servers one hour after conversion. Check out our privacy policy for more infos.</p>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-12 col-xs-12" style="margin-top:50px; margin-bottom:50px;">
+
+                        <div class="content-left">
+
+                            <div class="box-item left">
+
+                                <div class="text">
+                                    <h5 style="font-size:30px;"><i class="fa fa-random"></i> Any operating system works</h5>
+                                    <p>@title works on all computers - the operating system you use doesn't matter!</p>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-12 col-xs-12" style="margin-top:50px; margin-bottom:50px;">
+
+                        <div class="content-left">
+
+                            <div class="box-item left">
+
+                                <div class="text">
+                                    <h5 style="font-size:30px;"><i class="fa fa-cloud"></i> All in the cloud</h5>
+                                    <p>Our servers in the cloud process your files and you don't need to install anything on your computer. Isn't that great?</p>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*
+        <div class="text-center">
+            <div id="sp-0" class="sp sp-wide">
+                <p class="text-right"><span>@this.texts.GetText("SponsoredLink")</span></p>
+
+                <div class="sp-container">
+                    <script async= async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js">
+                    </script> <!-- 728 x 90 --> <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-6475235154742772" data-ad-slot="1982829070"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+            </div>
+        </div>
+    *@
+
+
+    <footer class="footer">
+        <!-- Footer Area Start -->
+        <section class="footer-Content">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 col-mb-12">
+                        <a href="/" class="navbar-brand" style="color:#ffffff;font-family: 'Work Sans', sans-serif; font-size:24px;">@this.texts.GetText("Title")</a>
+                        <div class="textwidget">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-9 col-md-6 col-sm-6 col-xs-6 col-mb-12">
+
+                        <p class="links pull-right txt-footer">
+                            <a href="/"><span data-language="Footer_Home" data-language-set="true">Home</span></a>
+                            <a href="/privacy-policy"><span data-language="Footer_PP" data-language-set="true">Privacy Policy</span></a>
+                            <a href="/terms"><span data-language="Footer_Terms" data-language-set="true">Terms of Use</span></a>
+                            <a href="/contact"><span data-language="Footer_Contact" data-language-set="true">Contact Us</span></a>
+                        </p>
+                        <div class="clearfix"></div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!-- Footer area End -->
+
+    </footer>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js">
+    </script>
+    <script defer src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
+    </script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous">
+    </script>
+    <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous">
+    </script>
+    <script defer src="~/js/language.js" asp-append-version="true">
+    </script>
+    <script defer src="~/js/common.js" asp-append-version="true">
+    </script>
+</body>
+</html>

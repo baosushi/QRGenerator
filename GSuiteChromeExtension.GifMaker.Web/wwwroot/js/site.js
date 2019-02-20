@@ -73,16 +73,6 @@ function checkDriveParams() {
 }
 
 function onSelectFileButtonClick(callback) {
-    //gapi.client.drive.files.get({
-    //    fileId: file.id
-    //}).then(function (resp) {
-    //    debugger
-    //    var retFile = { name: file.name, id: file.id, content: resp.body, parents: file.parents };
-    //    done(retFile);
-    //}, function (reason) {
-    //    console.log('loadFileRaw ERROR: ', reason);
-    //});
-
     oauthToken = loginService.getAccessToken();
 
     if (!oauthToken) {
@@ -96,7 +86,6 @@ function onSelectFileButtonClick(callback) {
 }
 
 function createPicker() {
-    var developerKey = $("[data-developer-key]").attr("data-developer-key");
     var appId = $("[data-app-id]").attr("data-app-id");
 
     var docsView = new google.picker.DocsView()
@@ -145,7 +134,7 @@ function pickerCallback(info) {
     }
 
     driveFileInfo = info;
-
+    $("#lbl-selected-filename").text(driveFileInfo.docs[0].name);
     getUserSelectedFile();
 }
 
