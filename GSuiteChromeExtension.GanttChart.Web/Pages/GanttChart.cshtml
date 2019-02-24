@@ -56,18 +56,24 @@
     <div class="col-lg-12">
         <h5>Selected task: <b><span id="select-task-label">none</span></b></h5>
     </div>
-    <div class="col-lg-12">
-        <button class="btn btn-primary" id="add-task" onclick="onAddButtonClick()" data-toggle="modal" data-target="#task-modal"><i class="fa fa-plus"></i> Add task</button>
-        <button class="btn btn-success" id="edit-task" onclick="onEditButtonClick()" data-toggle="modal" data-target="#task-modal" disabled><i class="fa fa-edit"></i> Edit task</button>
-        <button class="btn btn-danger" id="delete-task" onclick="onDeleteButtonClick()" disabled><i class="fa fa-trash"></i> Delete task</button>
-        <button class="btn btn-primary pull-right" id="save-as-chart" onclick="onSaveAsButtonClick()" style="margin-left: 5px;"><i class="fa fa-trash"></i> Save as...</button>
-        <button class="btn btn-success pull-right" id="save-chart" onclick="onSaveButtonClick()"><i class="fa fa-trash"></i> Save</button>
-    </div>
 </div>
-
 <div class="row">
-    <div class="col-lg-12">
-        <div style="position:relative" id="GanttChartDIV"></div>
+    <div class="col-lg-12" style="background: rgb(240, 244, 247);">
+        <div class="row">
+            <div class="col-lg-12" style="padding-top: 25px; padding-bottom: 25px;">
+                <button class="g-btn btn-white" id="add-task" onclick="onAddButtonClick()" data-toggle="modal" data-target="#task-modal"><i class="fa fa-plus"></i> Add task</button>
+                <button style="margin-left: 15px;" class="g-btn btn-white" id="edit-task" onclick="onEditButtonClick()" data-toggle="modal" data-target="#task-modal" disabled><i class="fa fa-edit"></i> Edit task</button>
+                <button style="margin-left: 15px;" class="g-btn btn-white-danger" id="delete-task" onclick="onDeleteButtonClick()" disabled><i class="fa fa-trash"></i> Delete task</button>
+                <button class="btn btn-primary pull-right" id="save-as-chart" onclick="onSaveAsButtonClick()" style="margin-left: 5px;"><i class="fa fa-trash"></i> Save as...</button>
+                <button class="btn btn-success pull-right" id="save-chart" onclick="onSaveButtonClick()"><i class="fa fa-trash"></i> Save</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div style="position:relative" id="GanttChartDIV"></div>
+            </div>
+        </div>
     </div>
 </div>
 

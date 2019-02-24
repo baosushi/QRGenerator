@@ -71,3 +71,171 @@ for details on configuring this project to bundle and minify static web assets. 
 .gmajorheading {
     text-align: -webkit-center !important;
 }
+
+
+
+
+
+/* CUSTOM RESKIN */
+.gtasktableh tr:first-child > td.gspanning {
+    height: 75px !important;
+}
+
+.gmajorheading {
+    height: 75px !important;
+    color: rgb(188, 195, 203);
+    border-left: 0px;
+    border-right: 0px;
+}
+
+.gtasktableh .gselector:first-child {
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+    .gtasktableh .gselector:first-child > .gformlabel {
+        border: 2px solid rgb(240, 244, 245);
+        border-left: 0px;
+        padding: 10px 20px;
+        margin-left: 0px;
+        color: rgb(194, 199, 205);
+    }
+
+        .gtasktableh .gselector:first-child > .gformlabel:first-child {
+            margin-left: 30px;
+            border-left: 2px solid rgb(240, 244, 245);
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+        }
+
+        .gtasktableh .gselector:first-child > .gformlabel:last-child {
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+        }
+
+        .gtasktableh .gselector:first-child > .gformlabel:hover, .gtasktableh .gselector:first-child > .gselected {
+            background-color: #FFF;
+            color: rgb(43, 148, 255);
+        }
+
+.gtaskblue,
+.gtaskred,
+.gtaskgreen,
+.gtaskyellow,
+.gtaskpurple,
+.gtaskpink {
+    border-radius: 4px;
+}
+
+.gtaskblue {
+    background: rgb(148, 201, 255);
+}
+
+.gtaskred {
+    background: rgb(246, 157, 151);
+}
+
+.gtaskgreen {
+    background: rgb(137, 239, 215);
+}
+
+.gtaskyellow {
+    background: rgb(254, 229, 128);
+}
+
+.gtaskpurple {
+    background: rgb(171, 170, 236);
+}
+
+.gtaskpink {
+    background: rgb(239, 158, 251);
+}
+
+.gtaskbluecomplete, .gtaskredcomplete, .gtaskgreencomplete, .gtaskyellowcomplete, .gtaskpurplecomplete, .gtaskpinkcomplete {
+    height: 13px;
+    opacity: 1.0;
+    margin-top: 0px;
+    border-radius: 4px;
+}
+
+.gtaskbluecomplete {
+    background-color: rgb(42, 147, 254);
+}
+
+.gtaskredcomplete {
+    background-color: rgb(243, 67, 54);
+}
+
+.gtaskgreencomplete {
+    background-color: rgb(29, 233, 182);
+}
+
+.gtaskyellowcomplete {
+    background-color: rgb(255, 204, 0);
+}
+
+.gtaskpurplecomplete {
+    background-color: rgb(132, 80, 254);
+}
+
+.gtaskpinkcomplete {
+    background-color: rgb(224, 64, 252);
+}
+
+.gitemhighlight td {
+    background-image: none;
+    background-color: rgb(228, 241, 255);
+}
+
+
+
+/* CUSTOM BUTTONS */
+.g-btn {
+    display: inline-block;
+    font-weight: 600;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .425rem .8rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .3rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    box-shadow: -2px 5px 10px #CCC;
+    -moz-box-shadow: -2px 5px 10px #CCC;
+    -webkit-box-shadow: -2px 5px 10px #CCC;
+    cursor: pointer;
+    color: rgb(70, 79, 86);
+}
+
+    .g-btn:disabled {
+        color: rgb(180, 189, 196);
+        cursor: default;
+    }
+
+    .g-btn.btn-white {
+        background-color: #FFF;
+    }
+
+        .g-btn.btn-white:not(:disabled):hover {
+            color: rgb(43, 148, 255);
+            box-shadow: -2px 5px 10px #AAA;
+            -moz-box-shadow: -2px 5px 10px #AAA;
+            -webkit-box-shadow: -2px 5px 10px #AAA;
+        }
+
+    .g-btn.btn-white-danger {
+        background-color: #FFF;
+    }
+
+        .g-btn.btn-white-danger:not(:disabled):hover {
+            color: rgb(255, 87, 100);
+            box-shadow: -2px 5px 10px #CCA1A1;
+            -moz-box-shadow: -2px 5px 10px #CCA1A1;
+            -webkit-box-shadow: -2px 5px 10px #CCA1A1;
+        }
