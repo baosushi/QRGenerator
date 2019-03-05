@@ -15,7 +15,7 @@
   "SaveToDrive_Title": "Save to Google Drive",
   "SaveToDrive_Help": "Your file is ready. Click the \"Save\" button below to save to your Google Drive.",
   "Dialog_Close": "Close",
-  "DjvuViewer_GeneratePicker": "Browse...",
+  "DjvuViewer_GeneratePicker": "Browse from Drive...",
   "DjvuViewer_Title": "Djvu Viewer",
   "DjvuViewer_Description": "View DjVu files directly from your Google Drive.",
   "DjvuViewer_Download": "Download GIF",

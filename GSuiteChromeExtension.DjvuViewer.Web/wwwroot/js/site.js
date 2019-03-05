@@ -118,7 +118,7 @@ function createPicker() {
     var docsView = new google.picker.DocsView()
         .setIncludeFolders(false)
         .setSelectFolderEnabled(false)
-        .setQuery("*.swf");
+        .setQuery("*.djvu");
 
     var picker = new google.picker.PickerBuilder()
         .addView(docsView)
