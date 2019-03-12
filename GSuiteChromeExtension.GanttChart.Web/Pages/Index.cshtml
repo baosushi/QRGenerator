@@ -2,34 +2,10 @@
 @{
     var title = this.texts.GetText("GanttChart_Title");
     this.ViewBag.Title = title;
+    this.Layout = null;
 }
-<h1>Welcome to @title</h1>
-<p>@this.texts.GetText("GanttChart_Description")</p>
-
-<div class="text-center">
-    <div id="sp-0" class="sp sp-wide">
-        <p class="text-right"><span>@this.texts.GetText("SponsoredLink")</span></p>
-
-        <div class="sp-container">
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> <!-- 728 x 90 --> <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-6475235154742772" data-ad-slot="1982829070"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        </div>
-    </div>
-</div>
-
-<div data-language="Index_Introduction" data-language-set="true">
-    <h3><i class="glyphicon glyphicon-lock"></i> Safety first!</h3>
-    <p> You care about privacy. We care about privacy. That's why all the data sending to our server are only keep within the processing and deleted immediately after. Check out our privacy policy for more information. </p>
-    <h3><i class="glyphicon glyphicon-random"></i> Any operating system works</h3>
-    <p> Our game tools work for all computers - the operating system you use doesn't matter. You can use our service even if you're using MacOS. </p>
-    <h3><i class="glyphicon glyphicon-cloud"></i> All in the cloud</h3>
-    <p> Our servers in the cloud help you to get access to game tools and you don't need to install anything on your computer. Isn't that great? This is a totally free online service. </p>
-    <hr>
-    <p class="text-center">
-        <a class="btn btn-default btn-lg" href="@Url.Page("GanttChart")">
-            <span>@title</span>
-        </a>
-    </p>
+@*<h1>Welcome to @title</h1>
+    <p>@this.texts.GetText("GanttChart_Description")</p>
 
     <div class="text-center">
         <div id="sp-0" class="sp sp-wide">
@@ -41,4 +17,204 @@
             </div>
         </div>
     </div>
-</div>
+
+    <div data-language="Index_Introduction" data-language-set="true">
+        <h3><i class="glyphicon glyphicon-lock"></i> Safety first!</h3>
+        <p> You care about privacy. We care about privacy. That's why all the data sending to our server are only keep within the processing and deleted immediately after. Check out our privacy policy for more information. </p>
+        <h3><i class="glyphicon glyphicon-random"></i> Any operating system works</h3>
+        <p> Our game tools work for all computers - the operating system you use doesn't matter. You can use our service even if you're using MacOS. </p>
+        <h3><i class="glyphicon glyphicon-cloud"></i> All in the cloud</h3>
+        <p> Our servers in the cloud help you to get access to game tools and you don't need to install anything on your computer. Isn't that great? This is a totally free online service. </p>
+        <hr>
+        <p class="text-center">
+            <a class="btn btn-default btn-lg" href="@Url.Page("GanttChart")">
+                <span>@title</span>
+            </a>
+        </p>
+
+        <div class="text-center">
+            <div id="sp-0" class="sp sp-wide">
+                <p class="text-right"><span>@this.texts.GetText("SponsoredLink")</span></p>
+
+                <div class="sp-container">
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> <!-- 728 x 90 --> <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-6475235154742772" data-ad-slot="1982829070"></ins>
+                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" type="text/css" href="~/css/style.css">
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.min.css">
+</head>
+<body>
+    <div id="header" class="head-bg section">
+        <div class="row header">
+            <div class="col-lg-5 col-md-5 col-sm-5">
+                <img src="~/images/logo-head.png">
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2"><a class="menu-item" href="@Url.Page("Index")">HOME</a></div>
+            <div class="col-lg-2 col-md-2 col-sm-2"><a class="menu-item" href="@Url.Page("GanttChart")">FEATURES</a></div>
+            <div class="col-lg-2 col-md-2 col-sm-2"><a class="menu-item" href="@Url.Page("ContactUs")">CONTACT</a></div>
+            @*<div class="col-lg-3 col-md-3 col-sm-3">
+                    <button type="button" name="google" class="google">SIGN IN WITH GOOGLE</button>
+                </div>*@
+            @*<div class="col-lg-1 col-md-1 col-sm-1 menu">
+                    <select class="selectpicker">
+                        <option>English</option>
+                        <option>Swedish</option>
+                        <option>Norwegian</option>
+                        <option>Dutch</option>
+                        <option>French</option>
+                        <option>Finnish</option>
+                        <option>German</option>
+                        <option>Danish</option>
+                        <option>Japanese</option>
+                    </select>
+                </div>*@
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 offset-md-2 header-title">
+                @title
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-5 offset-md-2 header-content">
+                @this.texts.GetText("Description")
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5 offset-md-2">
+                @*<input type="button" name="try" class="header-button" value="TRY NOW">*@
+                <a class="header-button" href="@Url.Page("GanttChart")">TRY NOW</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="feature" class="section">
+        <div class="row text-center">
+            <div class="col-md-6 offset-md-3 title">
+                Our Features
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-md-8 offset-md-2 description">
+                Free Online Gantt Chart is a fully featured gantt chart component built entirely in Javascript, CSS and AJAX.<br>
+                It is lightweight and there is no need of external libraries or additional images.
+            </div>
+        </div>
+        <div class="row content">
+            <div class="col-md-4 offset-md-2">
+                <ul>
+                    <li>Task & Collapsible Task Groups</li>
+                    <li>Multiple Dependencies</li>
+                    <li>Task Completion</li>
+                    <li>Task Style</li>
+                    <li>Milestones</li>
+                    <li>Resources</li>
+                    <li>Dynamic Loading of Tasks</li>
+                    <li>Dynamic change of format:<br> &nbsp Hour, Day, Week, Month, Quarter</li>
+                    <li>Load Gantt from:<br> &nbsp External XML files (including experimental support for Microsoft Project XML files, JavaScript strings</li>
+                    <li>Export Gantt as XML string</li>
+                    <li>Support for internationalization</li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <img src="~/images/chart.png">
+                <div class="text-center" style="color: #464f58; font-weight: 500;"><br>Easy to use and save to <img src="~/images/logo-drive.png" style="height: 1.5em; width: 1.5em;" /> Google Drive</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="usefull" class="section">
+        <div class="row text-center">
+            <div class="col-md-6 offset-md-3 title">
+                For whom it will be usefull?
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-md-8 offset-md-2 description">
+                Gantt Chart helps teams organize, manage projects and deadlines, work smarter and do more together.<br>
+                So we'l be usefull for:
+            </div>
+        </div>
+        <div class="row content">
+            <div class="col-md-6 offset-md-1">
+                <ul>
+                    <li>Small or medium teams looking for an easy way to classify their tasks</li>
+                    <li>Limited funds teams that need to work fully</li>
+                    <li>You need to track the entire project in one place</li>
+                    <li>For those who need a balance between functionality and ease to use</li>
+                </ul>
+                <ul>
+                    <li>Small or medium teams looking for an easy way to classify their tasks</li>
+                    <li>Limited funds teams that need to work fully</li>
+                    <li>You need to track the entire project in one place</li>
+                    <li>For those who need a balance between functionality and ease to use</li>
+                </ul>
+                <ul>
+                    <li>Small or medium teams looking for an easy way to classify their tasks</li>
+                    <li>Limited funds teams that need to work fully</li>
+                    <li>You need to track the entire project in one place</li>
+                    <li>For those who need a balance between functionality and ease to use</li>
+                </ul>
+                <br>
+            </div>
+            <div class="col-md-3">
+                <img src="~/images/team.png">
+            </div>
+        </div>
+    </div>
+
+
+    <div id="contact" class="contact-bg section">
+        <div class="row text-center">
+            <div class="col-md-6 offset-md-3 contact">
+                Contact Us
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-md-8 offset-md-2 description">
+                Got a question? We'd love to hear from you. Send us a message<br>
+                and we'l respond as soon as possible.
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 offset-md-4 form">
+                <input type="text" name="name" placeholder="Your Name"><br>
+                <input type="text" name="name" placeholder="Your Email"><br>
+                <textarea placeholder="Your Message" rows="6"></textarea><br>
+                <input type="submit" name="send" value="SEND MY MESSAGE">
+            </div>
+        </div>
+    </div>
+
+    <div id="slogan" class="slogan-bg section" style="display: flex;">
+        <div class="container-fluid text-center" style="display: block; width: 100%; margin: auto;">
+            Ready to organize
+            <br />
+            <span style="font-weight: bold;">your project?</span>
+            <br />
+            <a class="header-button" href="@Url.Page("GanttChart")">TRY NOW</a>
+        </div>
+    </div>
+
+    <div id="footer">
+        <div class="row foot">
+            <div class="col-lg-3 col-md-3 col-sm-3" style="display: flex;"><img src="~/images/logo-foot.png" class="vertical-center"></div>
+            <div class="col-lg-4 col-md-4 col-sm-4 text-table"><span>&copy 2019. All rights reserved.</span></div>
+            <div class="col-lg-1 col-md-1 col-sm-1 text-table"><a href="@Url.Page("Index")">HOME</a></div>
+            <div class="col-lg-1 col-md-1 col-sm-1 text-table"><a href="@Url.Page("GanttChart")">FEATURES</a></div>
+            <div class="col-lg-1 col-md-1 col-sm-1 text-table"><a href="@Url.Page("PrivacyPolicy")">PRIVACY POLICY</a></div>
+            <div class="col-lg-1 col-md-1 col-sm-1 text-table"><a href="@Url.Page("Terms")">TERM OF USE</a></div>
+            <div class="col-lg-1 col-md-1 col-sm-1 text-table"><a href="@Url.Page("ContactUs")">CONTACT</a></div>
+        </div>
+    </div>
+</body>
+</html>

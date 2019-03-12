@@ -266,3 +266,4 @@ __pycache__/
 *.pubxml
 /GSuiteChromeExtension.DjvuViewer.Web/appsettings.json
 /GSuiteChromeExtension.DjvuViewer.Web/appsettings.Development.json
+/GSuiteChromeExtension.GifMaker.Web/appsettings.json

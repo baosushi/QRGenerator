@@ -3,51 +3,120 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <link async rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" type="text/css" href="~/css/style.css">
     <link async rel="stylesheet" href="~/css/design1.min.css" asp-append-version="true" />
-
+    @*<link rel="stylesheet" type="text/css" href="~/css/bootstrap.min.css">*@
     <title>@(this.ViewBag.Title)</title>
-
     @this.RenderSection("Heads", false)
 </head>
-<body lang="@(this.texts.GetLanguageCode())">
+@*
+    <body lang="@(this.texts.GetLanguageCode())">
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=123"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=123"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
 
-        gtag('config', '123');
-    </script>
+            gtag('config', '123');
+        </script>
 
-    <div class="cover align-items-center">
-        <p class="w-100 text-center"></p>
-    </div>
+        <div class="cover align-items-center">
+            <p class="w-100 text-center"></p>
+        </div>
 
-    <header class="header">
-        <div class="container">
-            <div class="d-flex justify-content-between align-items-center">
-                <h1>@this.texts.GetText("Title")</h1>
+        <header class="header">
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h1>@this.texts.GetText("Title")</h1>
+                </div>
             </div>
+        </header>
+
+        <section id="language-selector">
+            <div class="container">
+                <div class="row">
+                    <div class="col"></div>
+                    <div class="col col-auto">
+                        <select class="form-control" data-language-box></select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="section-main" class="main-content">
+            <div class="container">
+                <div class="page-content">
+                    <div class="row">
+                        <div class="">
+                        </div>
+                        <div class="col-lg-12">
+                            @this.RenderBody()
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="d-flex links">
+                    <a href="/"><span>@this.texts.GetText("Footer_Home")</span></a>
+                    <a href="/privacy-policy"><span>@this.texts.GetText("Footer_PP")</span></a>
+                    <a href="/terms"><span>@this.texts.GetText("Footer_Terms")</span></a>
+                    <a href="/contact"><span>@this.texts.GetText("Footer_Contact")</span></a>
+                </div>
+
+                @this.RenderSection("FooterParts", false)
+            </div>
+
+        </footer>
+
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+        <script defer src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+        <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
+        <script defer src="~/js/language.js" asp-append-version="true"></script>
+        <script defer src="~/js/common.js" asp-append-version="true"></script>
+        @RenderSection("scripts", required: false)
+
+    </body>
+*@
+<body>
+    <header id="header" class="layout-head-bg section">
+        <div class="row header" style="margin: auto;">
+            <div class="col-lg-5 col-md-5 col-sm-5">
+                <img src="~/images/logo-head.png">
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2"><a class="menu-item" href="@Url.Page("Index")">HOME</a></div>
+            <div class="col-lg-2 col-md-2 col-sm-2"><a class="menu-item" href="@Url.Page("GanttChart")">FEATURES</a></div>
+            <div class="col-lg-2 col-md-2 col-sm-2"><a class="menu-item" href="@Url.Page("ContactUs")">CONTACT</a></div>
+            @*<div class="col-lg-3 col-md-3 col-sm-3">
+                    <button type="button" name="google" class="google">SIGN IN WITH GOOGLE</button>
+                </div>*@
+            @*<div class="col-lg-1 col-md-1 col-sm-1 menu">
+                    <select class="selectpicker">
+                        <option>English</option>
+                        <option>Swedish</option>
+                        <option>Norwegian</option>
+                        <option>Dutch</option>
+                        <option>French</option>
+                        <option>Finnish</option>
+                        <option>German</option>
+                        <option>Danish</option>
+                        <option>Japanese</option>
+                    </select>
+                </div>*@
         </div>
     </header>
 
-    <section id="language-selector">
-        <div class="container">
-            <div class="row">
-                <div class="col"></div>
-                <div class="col col-auto">
-                    <select class="form-control" data-language-box></select>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="section-main" class="main-content">
+    <section id="section-main" class="main-content section">
         <div class="container">
             <div class="page-content">
                 <div class="row">
@@ -61,18 +130,16 @@
         </div>
     </section>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="d-flex links">
-                <a href="/"><span>@this.texts.GetText("Footer_Home")</span></a>
-                <a href="/privacy-policy"><span>@this.texts.GetText("Footer_PP")</span></a>
-                <a href="/terms"><span>@this.texts.GetText("Footer_Terms")</span></a>
-                <a href="/contact"><span>@this.texts.GetText("Footer_Contact")</span></a>
-            </div>
-
-            @this.RenderSection("FooterParts", false)
+    <footer id="footer">
+        <div class="row foot">
+            <div class="col-lg-3 col-md-3 col-sm-3" style="display: flex;"><img src="~/images/logo-foot.png" class="vertical-center"></div>
+            <div class="col-lg-4 col-md-4 col-sm-4 text-table"><span>&copy 2019. All rights reserved.</span></div>
+            <div class="col-lg-1 col-md-1 col-sm-1 text-table"><a href="@Url.Page("Index")">HOME</a></div>
+            <div class="col-lg-1 col-md-1 col-sm-1 text-table"><a href="@Url.Page("GanttChart")">FEATURES</a></div>
+            <div class="col-lg-1 col-md-1 col-sm-1 text-table"><a href="@Url.Page("PrivacyPolicy")">PRIVACY POLICY</a></div>
+            <div class="col-lg-1 col-md-1 col-sm-1 text-table"><a href="@Url.Page("Terms")">TERM OF USE</a></div>
+            <div class="col-lg-1 col-md-1 col-sm-1 text-table"><a href="@Url.Page("ContactUs")">CONTACT</a></div>
         </div>
-
     </footer>
 
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -84,6 +151,5 @@
     <script defer src="~/js/language.js" asp-append-version="true"></script>
     <script defer src="~/js/common.js" asp-append-version="true"></script>
     @RenderSection("scripts", required: false)
-
 </body>
 </html>

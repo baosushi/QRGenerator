@@ -239,3 +239,8 @@ for details on configuring this project to bundle and minify static web assets. 
             -moz-box-shadow: -2px 5px 10px #CCA1A1;
             -webkit-box-shadow: -2px 5px 10px #CCA1A1;
         }
+
+.gTaskInfo {
+    background: #FFF;
+    border: #656565 3px solid;
+}
