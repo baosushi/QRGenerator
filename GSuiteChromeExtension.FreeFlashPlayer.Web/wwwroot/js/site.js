@@ -32,8 +32,6 @@ function checkAvailable() {
 function updateSigninStatus(isSignedIn) {
     if (isSignedIn) {
         checkDriveParams();
-    } else {
-        loginService.signIn();
     }
 }
 
