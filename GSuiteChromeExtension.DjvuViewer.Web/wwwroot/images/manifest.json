@@ -1,17 +1,23 @@
 {
-    "name": "Free Gantt Chart",
+    "name": "Free Djvu Viewer",
     "version": "1.0",
     "manifest_version": 2,
-    "description": "Create professional Gantt Chart to manage your work task for free.",
+    "description": "View DjVu files directly from your Google Drive or your computer.",
     "container": [ "GOOGLE_DRIVE", "DOMAIN_INSTALLABLE" ],
-    "api_console_project_id": "429665447038",
+    "api_console_project_id": "151694528001",
+	"app": {
+        "launch": {
+            "web_url": "https://djvu-viewer.freebusinessapps.net"
+        }
+    },
     "gdrive_mime_types": {
         "http://drive.google.com/intents/opendrivedoc": [
             {
                 "type": [
-                    "application/x-shockwave-flash"
+                    "image/x.djvu",
+					"image/vnd.djvu"
                 ],
-                "href": "https://gantt.freebusinessapps.net/gantt-chart",
+                "href": "https://djvu-viewer.freebusinessapps.net/djvu-viewer",
                 "title": "Open",
                 "disposition": "window"
             }
@@ -28,16 +34,7 @@
         "32": "logo_32.png",
         "16": "logo_16.png"
     },
-    "browser_action": {
-        "default_icon": {
-            "512": "logo_512.png",
-			"256": "logo_256.png",
-			"128": "logo_128.png",
-			"96": "logo_96.png",
-			"64": "logo_64.png",
-			"48": "logo_48.png",
-			"32": "logo_32.png",
-			"16": "logo_16.png"
-        }
-    }
+	"background": {
+		"scripts": [ "launch.js" ]
+	}
 }
