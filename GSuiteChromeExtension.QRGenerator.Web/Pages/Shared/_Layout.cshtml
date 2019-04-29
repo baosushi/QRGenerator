@@ -6,7 +6,8 @@
 
     <link async rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link async rel="stylesheet" href="~/css/design1.min.css" asp-append-version="true" />
+    @*<link async rel="stylesheet" href="~/css/design1.min.css" asp-append-version="true" />*@
+    <link async rel="stylesheet" href="~/css/main.css" asp-append-version="true" />
 
     <title>@(this.ViewBag.Title)</title>
 
@@ -24,30 +25,30 @@
         gtag('config', '123');
     </script>
 
-    <div class="cover align-items-center">
-        <p class="w-100 text-center"></p>
-    </div>
-
-    <header class="header">
-        <div class="container">
-            <div class="d-flex justify-content-between align-items-center">
-                <h1>@this.texts.GetText("Title")</h1>
-            </div>
+    @*<div class="cover align-items-center">
+            <p class="w-100 text-center"></p>
         </div>
-    </header>
 
-    <section id="language-selector">
-        <div class="container">
-            <div class="row">
-                <div class="col"></div>
-                <div class="col col-auto">
-                    <select class="form-control" data-language-box></select>
+        <header class="header">
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h1>@this.texts.GetText("Title")</h1>
                 </div>
             </div>
-        </div>
-    </section>
+        </header>
 
-    <section id="section-main" class="main-content">
+        <section id="language-selector">
+            <div class="container">
+                <div class="row">
+                    <div class="col"></div>
+                    <div class="col col-auto">
+                        <select class="form-control" data-language-box></select>
+                    </div>
+                </div>
+            </div>
+        </section>*@
+
+    <section id="section-main" class="main-content" style="min-height: 804px !important;">
         <div class="container">
             <div class="page-content">
                 <div class="row">
@@ -62,16 +63,66 @@
     </section>
 
     <footer class="footer">
-        <div class="container">
-            <div class="d-flex links">
-                <a href="/"><span>@this.texts.GetText("Footer_Home")</span></a>
-                <a href="/privacy-policy"><span>@this.texts.GetText("Footer_PP")</span></a>
-                <a href="/terms"><span>@this.texts.GetText("Footer_Terms")</span></a>
-                <a href="/contact"><span>@this.texts.GetText("Footer_Contact")</span></a>
-            </div>
+        @*<div class="container">
+                <div class="d-flex links">
+                    <a href="/"><span>@this.texts.GetText("Footer_Home")</span></a>
+                    <a href="/privacy-policy"><span>@this.texts.GetText("Footer_PP")</span></a>
+                    <a href="/terms"><span>@this.texts.GetText("Footer_Terms")</span></a>
+                    <a href="/contact"><span>@this.texts.GetText("Footer_Contact")</span></a>
+                </div>
+                @this.RenderSection("FooterParts", false)
+            </div>*@
 
-            @this.RenderSection("FooterParts", false)
-        </div>
+
+        <!-- Footer Area Start -->
+        <section class="footer-Content">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 col-mb-12">
+                        <a href="/" class="navbar-brand" style="color:#ffffff;font-family: 'Work Sans', sans-serif; font-size:24px;">@this.texts.GetText("Title")</a>
+                        <div class="textwidget">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-9 col-md-6 col-sm-6 col-xs-6 col-mb-12">
+
+                        <p class="links pull-right txt-footer">
+                            <a href="/"><span data-language="Footer_Home" data-language-set="true">Home</span></a>
+                            <a href="/privacy-policy"><span data-language="Footer_PP" data-language-set="true">Privacy Policy</span></a>
+                            <a href="/terms"><span data-language="Footer_Terms" data-language-set="true">Terms of Use</span></a>
+                            <a href="/contact"><span data-language="Footer_Contact" data-language-set="true">Contact Us</span></a>
+                        </p>
+                        <div class="clearfix"></div>
+
+                    </div>
+
+                </div>
+            </div>
+            @*
+                <!-- Copyright Start  -->
+                <div class="copyright">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="site-info float-left">
+
+                                </div>
+                                <div class="float-right">
+                                    <ul class="footer-social">
+                                        <li><a class="infor-mail" href="#"><i class=""></i><span class="__cf_email__" data-cfemail="0c3e3c3d3b7a656f78637e6065614c6b616d6560226f6361">[email&#160;protected]</span></a></li>
+
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Copyright End -->
+            *@
+        </section>
+        <!-- Footer area End -->
 
     </footer>
 

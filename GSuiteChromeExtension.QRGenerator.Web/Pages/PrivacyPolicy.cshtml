@@ -1,35 +1,90 @@
 ﻿@page "/privacy-policy"
-
 @{
     this.ViewBag.Title = "Privacy Policy";
 }
 
-<article>
-    <h2>Privacy Policy</h2>
+@section Heads{
+    <style>
+        h5 {
+            font-size: 20px;
+            font-family: 'Work Sans', sans-serif;
+            font-weight: 1;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
 
-    <h3>Information We Collect</h3>
-    <p>
-        We collect personal information in order to provide you with a better use of our website. Anonymous information such as the number of your link clicks, page views, and login times may also be collected to help us enhance your overall experience. We may store your personal information in an aggregate format or in an identifiable format.
-    </p>
+        .section-header {
+            margin-bottom: 60px;
+        }
 
-    <h3>How We Collect Information</h3>
-    <h4>Information You Provide to Us.</h4>
-    <p>When you use our website services, we may collect information provided to us when you use our website.</p>
-    <h4>Files which are Uploaded</h4>
-    <p>When you use Hopebest services, your files are uploaded to our web server to be processed. These files are automatically deleted within 1 hour and the files which are uploaded are NOT kept at all after 1 hour. You retain all ownership and rights to the files which are uploaded to our servers and our service only helps you to processing your files.</p>
-    <h4>Automatically Captured Information.</h4>
-    <p>We automatically collect information sent to us by your operating device when you use our Services. The information sent to us may include your IP address, data about the pages you access, mobile network information, search history, and a time-stamp. Through the content of our undeleted cookies, we may also collect information regarding the devices connected to your computer, software installed upon, and referring website addresses.</p>
+        ul li {
+            list-style: none;
+            margin-left: 11px;
+        }
 
-    <h4>Other Technologies</h4>
-    <p>We may also collect and store information through our use of cookies and web beacons to help provide you with a better and safer experience with our Services. Web beacons are small graphic images that may be embedded in images on our site to customize the services we offer to our users.</p>
+        .bor-der-left {
+            margin-top: 20px;
+            border-left: 3px solid #4cb5fd;
+            margin-bottom: 20px;
+        }
 
-    <h4>Information Collected By Third-Parties And Behavioral Advertising</h4>
-    <p>
-        On Advertising Services:  We may also obtain information about you from third parties such as our authorized service providers, advertising companies, and other affiliates. In order to gather information about users who interact with their advertisements, these companies may use cookies to monitor clicks.
-    </p>
-    <p>
-        On Third Party Sites, Services, And Applications.  We correspond with advertisers, data management platform, and ad networks to customize online behavioral advertisements that are created to target users' interests. In order to deliver these advertisements, these third parties may and/or we may disclose to these third parties an identification number to be associated with your device's platform.
-    </p>
+            .bor-der-left p {
+                padding-left: 15px;
+                color: #424448;
+                font-family: 'Work Sans', sans-serif;
+            }
+
+        .section-header .section-title {
+            font-weight: 1
+        }
+    </style>
+}
+
+<div class="section-header">
+    <h2 class="section-title sec-ti wow fadeIn"><img src="/images/icon.png" style="margin-right: 20px; font-family: 'Montserrat', sans-serif;">Privacy Policy</h2>
+
+</div>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-xs-12">
+        <div class="content-left">
+            <h5>Information We Collect</h5>
+            <p>
+                We collect personal information in order to provide you with a better use of our website. Anonymous information such as the number of your link clicks, page views, and login times may also be collected to help us enhance your overall experience. We may store your personal information in an aggregate format or in an identifiable format.
+            </p>
 
 
-</article>
+            <h5>How We Collect Information</h5>
+
+
+            <h5>Information You Provide to Us.</h5>
+            <p>
+                When you use our website services, we may collect information provided to us when you use our website.
+            </p>
+
+
+            <h5>Files which are Uploaded</h5>
+            <p>
+                When you use our services, your files are uploaded to our web server to be processed. These files are automatically deleted within 1 hour and the files which are uploaded are NOT kept at all after 1 hour. You retain all ownership and rights to the files which are uploaded to our servers and our service only helps you to process your files.
+            </p>
+
+
+            <h5>Automatically Captured Information.</h5>
+            <p>
+                We automatically collect information sent to us by your operating device when you use our Services. The information sent to us may include your IP address, data about the pages you access, mobile network information, search history, and a time-stamp. Through the content of our undeleted cookies, we may also collect information regarding the devices connected to your computer, software installed upon, and referring website addresses.
+            </p>
+
+            <h5>Other Technologies</h5>
+            <p>
+                We may also collect and store information through our use of cookies and web beacons to help provide you with a better and safer experience with our Services. Web beacons are small graphic images that may be embedded in images on our site to customize the services we offer to our users.
+            </p>
+
+
+            <h5> Information Collected By Third-Parties And Behavioral Advertising</h5>
+            <p style="margin-bottom:20px;">
+                On Advertising Services: We may also obtain information about you from third parties such as our authorized service providers, advertising companies, and other affiliates. In order to gather information about users who interact with their advertisements, these companies may use cookies to monitor clicks.
+
+                On Third Party Sites, Services, And Applications. We correspond with advertisers, data management platform, and ad networks to customize online behavioral advertisements that are created to target users' interests. In order to deliver these advertisements, these third parties may and/or we may disclose to these third parties an identification number to be associated with your device's platform.
+            </p>
+        </div>
+    </div>
+</div>
