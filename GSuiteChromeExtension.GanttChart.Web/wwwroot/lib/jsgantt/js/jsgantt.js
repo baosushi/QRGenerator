@@ -99,6 +99,9 @@ exports.GanttChart = function (pDiv, pFormat) {
     this.vCaptionType;
     this.vDepId = 1;
     this.vTaskList = new Array();
+
+    this.vProjectInfo = null;
+
     this.vFormatArr = new Array('hour', 'day', 'week', 'month', 'quarter');
     this.vMonthDaysArr = new Array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
     this.vProcessNeeded = true;
@@ -125,6 +128,12 @@ exports.GanttChart = function (pDiv, pFormat) {
     this.mouseOver = events_1.mouseOver;
     this.mouseOut = events_1.mouseOut;
     this.createTaskInfo = task_1.createTaskInfo;
+
+
+    this.AddProjectInfo = task_1.AddProjectInfo;
+    this.GetProjectInfo = task_1.getProjectInfo;
+
+
     this.AddTaskItem = task_1.AddTaskItem;
     this.AddTaskItemObject = task_1.AddTaskItemObject;
     this.RemoveTaskItem = task_1.RemoveTaskItem;
@@ -1044,6 +1053,53 @@ var makeInput = function (formattedValue, editable, type, value, choices) {
         return formattedValue;
     }
 };
+
+
+
+
+
+exports.getProjectInfo() = function () {
+    if (!vProjectInfo) {
+        vProjectInfo = {
+            Name: '',
+            Description: '',
+            StartDate: new Date().toISOString(),
+            EndDate: new Date().toISOString(),
+            Note: ''
+        };
+    }
+
+    return vProjectInfo;
+}
+
+
+
+
+
+
+
+exports.AddProjectInfo = function (pGanttVar, pXmlDoc) {
+    var projName = exports.findXMLNode(pXmlDoc, 'prName')[0].textContent;
+    var projDescription = exports.findXMLNode(pXmlDoc, 'prDescription')[0].textContent;
+    var projStart = exports.findXMLNode(pXmlDoc, 'prStart')[0].textContent;
+    var projEnd = exports.findXMLNode(pXmlDoc, 'prEnd')[0].textContent;
+    var projNote = exports.findXMLNode(pXmlDoc, 'prNote')[0].textContent;
+
+    vProjectInfo = {
+        Name: projName,
+        Description: projDescription,
+        StartDate: projStart,
+        EndDate: projEnd,
+        Note: projNote
+    };
+}
+
+
+
+
+
+
+
 exports.updateFlyingObj = function (e, pGanttChartObj, pTimer) {
     var vCurTopBuf = 3;
     var vCurLeftBuf = 5;
@@ -3399,6 +3455,7 @@ exports.parseXML = function (pFile, pGanttVar) {
     xhttp.send(null);
     var xmlDoc = xhttp.responseXML;
     exports.AddXMLTask(pGanttVar, xmlDoc);
+    exports.AddProjectInfo(pGanttVar, xmlDoc);
 };
 exports.parseXMLString = function (pStr, pGanttVar) {
     var xmlDoc;
@@ -3412,6 +3469,7 @@ exports.parseXMLString = function (pStr, pGanttVar) {
         xmlDoc.loadXML(pStr);
     }
     exports.AddXMLTask(pGanttVar, xmlDoc);
+    exports.AddProjectInfo(pGanttVar, xmlDoc);
 };
 exports.findXMLNode = function (pRoot, pNodeName) {
     var vRetValue;
@@ -3658,6 +3716,23 @@ exports.AddXMLTask = function (pGanttVar, pXmlDoc) {
 };
 exports.getXMLProject = function () {
     var vProject = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">';
+
+    if (!vProjectInfo) {
+        vProjectInfo = {
+            Name: '',
+            Description: '',
+            StartDate: new Date().toISOString(),
+            EndDate: new Date().toISOString(),
+            Note: ''
+        };
+    }
+
+    vProject += `<prName>${vProjectInfo.Name}</prName>`;
+    vProject += `<prDescription>${vProjectInfo.Description}</prDescription>`;
+    vProject += `<prStart>${vProjectInfo.StartDate}</prStart>`;
+    vProject += `<prEnd>${vProjectInfo.EndDate}</prEnd>`;
+    vProject += `<prNote>${vProjectInfo.Note}</prNote>`;
+
     for (var i = 0; i < this.vTaskList.length; i++) {
         vProject += this.getXMLTask(i, true);
     }
